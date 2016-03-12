@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="hhzzk&#39;s blog">
+    <title>0-1背包问题的动态规划算法 - hhzzk&#39;s blog</title>
+    <meta name="author" content="hhzzk">
+    
+    
+    
+    <meta name="description" content="####【问题描述】&amp;emsp;&amp;emsp;有一个贼在偷窃一家商店时发现n件物品，其中第i件物品的价值为Vi 元，重wi千克。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="0-1背包问题的动态规划算法">
+<meta property="og:url" content="http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/index.html">
+<meta property="og:site_name" content="hhzzk's blog">
+<meta property="og:description" content="####【问题描述】&amp;emsp;&amp;emsp;有一个贼在偷窃一家商店时发现n件物品，其中第i件物品的价值为Vi 元，重wi千克。">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/9d15fcebgw1erosbbs2nwj20ks02rdg0.jpg">
+<meta property="og:updated_time" content="2016-03-12T08:55:12.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="0-1背包问题的动态规划算法">
+<meta name="twitter:description" content="####【问题描述】&amp;emsp;&amp;emsp;有一个贼在偷窃一家商店时发现n件物品，其中第i件物品的价值为Vi 元，重wi千克。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/9d15fcebgw1erosbbs2nwj20ks02rdg0.jpg">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-quwccsthbllipo6252snb2tfkddvrsp1eczkytpz3vmxpsb6nwodixemlkux.min.css">
+    <!--STYLES END-->
+    
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">hhzzk&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            0-1背包问题的动态规划算法
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sat Dec 13 2014 21:50:54 GMT+0800">
+	
+		    12月 13, 2014
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/算法系列/">算法系列</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>####【问题描述】<br>&emsp;&emsp;有一个贼在偷窃一家商店时发现n件物品，其中第i件物品的价值为Vi 元，重wi千克。<a id="more"></a>此处的Vi 和wi都为整数。他希望带走的东西越值钱越好，但他的背包只能放下W千克的物品，W为一整数。那么他应该带走那几件物品呢？</p>
+<p>&emsp;在上面的问题中所有物品只能被留下或者带走，不存在带走一部分的情况，所以问题被称为0-1背包问题。</p>
+<p>####【算法原理】<br>&emsp;&emsp;首先了解一下几个表达式的含义：</p>
+<ul>
+<li><code>v[1...n]</code> : 表示n个物品的价值；</li>
+<li><code>w[1...n]</code> : 表示n个物品的重量；</li>
+<li><code>maxVal[weight][num]</code>:其中保存前num件物品，承载量为weight千克的背包所能得到的最大价值；</li>
+<li><code>maxVal(weight, num)</code> : 表示对于前num件物品，承载量为weight千克的背包所能得到的最大价值。</li>
+</ul>
+<p>&emsp;&emsp;面对所有的物品，小偷要考虑的就是拿或者不拿，哪一种方案得到的物品价值最大。假设从物品n开始考虑，如果拿走第n件物品，则小偷得到了第n件物品的价值vn，相应的小偷的背包只能放下 <code>W-wi</code>  千克重的物品了，表达式 <code>maxVal(W-wi, n-1)</code> 表示前 <code>n-1</code> 个物品，承载量为 <code>W-wi</code> 千克的背包得到的最大价值。所以如果小偷拿走第n件物品所能得到的最大价值为： <code>vn + maxVal(W-wi, n-1)</code> 。如果不拿走第n件物品，那么小偷仍然有承载量为W千克的背包，所以小偷能得到的最大价值就是W千克的背包在前 <code>n-1</code> 个物品中所能获得的最大价值: <code>maxVal(W, n-1)</code> 。小偷知道了在两种不同的情况下所能获得最大价值后就可以对第n件物品进行取舍了，所以能获得的最大价值为：</p>
+<pre><code>maxVal(W, n) = max {vn + maxVal(W-wi, n-1)， maxVal(W, n-1)}
+</code></pre><p>&emsp;&emsp;很显然，上式是一个递归式，并且当wight=0或者num=0时， <code>maxVal(weight, num)</code> 的值为0，当 <code>weight &lt; wnun</code> ，即背包所能承载的重量放不下当前的物品时， <code>maxVal(weight, num)</code> 的值为 <code>maxVal(weight, num-1)</code> ，因为第num件物品不存在放不放的问题了，根本就放不进去。所以有：</p>
+<p><img src="http://ww4.sinaimg.cn/large/9d15fcebgw1erosbbs2nwj20ks02rdg0.jpg" alt="gongshi"></p>
+<p>&emsp;&emsp;由此我们可以很轻松写出动态规划的算法，注意在递归函数中首先要判断 <code>maxVal[W][n]</code> 中是否已经存储了要获取的值，避免重复计算，这也是动态规划算法的优势所在。</p>
+<p>&emsp;&emsp;根据保存在数组 <code>maxVal[W][n]</code> 中的值，我们可以利用回溯法得到最优子集。基本思想是如果拿掉第n件物品，获取的最大价值 <code>maxVal[W][n]</code> 等于 <code>maxVal[W-wn][n-1] + vn</code> ，则第n件物品拿走，否则相反。然后依次类推。</p>
+<p>####【代码实现】<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="string">"common.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Record goods max value </span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> gMaxValue[PACKAGE_CAPACITY+<span class="number">1</span>][GOODS_MAX_KIND+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxValue</span><span class="params">(Goods *goods[], <span class="keyword">int</span> bagCap, <span class="keyword">int</span> goodsNum)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> value2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> maxVal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> weight = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(gMaxValue[bagCap][goodsNum] != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> gMaxValue[bagCap][goodsNum];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(goodsNum &lt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// Only one goods</span></span><br><span class="line">    <span class="keyword">if</span>(goodsNum == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(bagCap &gt;= goods[goodsNum<span class="number">-1</span>] -&gt; Weight)</span><br><span class="line">            maxVal = goods[goodsNum<span class="number">-1</span>] -&gt; Value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        weight = goods[goodsNum<span class="number">-1</span>]-&gt;Weight;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Goods can not put in to the bag </span></span><br><span class="line">        <span class="keyword">if</span>(bagCap &lt; weight)</span><br><span class="line">        &#123;</span><br><span class="line">            maxVal = maxValue(goods, bagCap, goodsNum<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Judge the max value</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            value1 = goods[goodsNum<span class="number">-1</span>]-&gt;Value + maxValue(goods, bagCap-weight, goodsNum<span class="number">-1</span>);</span><br><span class="line">            value2 = maxValue(goods, bagCap, goodsNum<span class="number">-1</span>);</span><br><span class="line">        </span><br><span class="line">            maxVal = value1 &gt; value2 ? value1 : value2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    gMaxValue[bagCap][goodsNum] = maxVal;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> maxVal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get the selected goods</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getGoods</span><span class="params">(Goods *goods[], <span class="keyword">int</span> flag[], <span class="keyword">int</span> goodsNum)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = PACKAGE_CAPACITY;</span><br><span class="line">    <span class="keyword">int</span> j = goodsNum;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(gMaxValue[i][j] != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(gMaxValue[i][j]-goods[j<span class="number">-1</span>]-&gt;Value == gMaxValue[i-(<span class="keyword">int</span>)goods[j<span class="number">-1</span>]-&gt;Weight][j<span class="number">-1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            flag[j] = <span class="number">1</span>;</span><br><span class="line">            i = i-goods[j<span class="number">-1</span>]-&gt;Weight;</span><br><span class="line">            j = j - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            j = j<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> realNum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> maxVal = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> W = PACKAGE_CAPACITY;</span><br><span class="line">    <span class="keyword">int</span> flag[GOODS_MAX_KIND+<span class="number">1</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    Goods *goods[GOODS_MAX_KIND] = &#123;<span class="literal">NULL</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i &lt;= W; i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;=GOODS_MAX_KIND; j++)</span><br><span class="line">            gMaxValue[i][j] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    realNum = getGoodsInformation(goods);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// sortByPrice(goods, realNum);</span></span><br><span class="line"></span><br><span class="line">    maxVal = maxValue(goods, W, realNum);</span><br><span class="line">    </span><br><span class="line">    getGoods(goods, flag, realNum);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;GOODS_MAX_KIND+<span class="number">1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(flag[i] == <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d ,"</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The total is %d\n"</span>,maxVal);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####【参考资料】</p>
+<ul>
+<li>一篇很棒的解释动态规划的文章：<a href="http://www.cnblogs.com/SDJL/archive/2008/08/22/1274312.html" target="_blank" rel="external">通过金矿模型介绍动态规划</a></li>
+<li><a href="http://www.cnblogs.com/lpshou/archive/2012/04/17/2454009.html" target="_blank" rel="external">回溯法图解</a></li>
+</ul>
+<hr>
+<p>(完)</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/0-1背包/">0-1背包</a> <a class="tag tag--primary tag--small t-link" href="/tags/动态规划/">动态规划</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 hhzzk. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/13/0-1_package_dp_arithmetic/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <h4 id="about-card-name">hhzzk</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-rjanlllosg30d03qrddpwrs6wqf4k3v0bbo68hiifuvthyhqfefx2htcagu0.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
