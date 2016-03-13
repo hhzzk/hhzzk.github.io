@@ -286,7 +286,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
@@ -312,64 +312,23 @@
 </div>
             </div>
             
-                <div class="postShorten-thumbnailimg postShorten-thumbnailimg--bottom">
-                    <img alt="" itemprop="image" src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg"/>
-                </div>
-                
             
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>由于不同的操作系统采用了不同的换行符，所以当 windows 的文件 copy 到 Linux 之后会发现行尾多出 <code>^M</code> 。<br><!-- excerct --></p>
-<p>做编译原理实验时，在vim中打开实验用到的文件发现行尾都带着 <code>^M</code> 。google之后发现原来这是因为不同的操作系统采用了不同的换行符造成的。在不同的系统上换行符分别如下：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">OS</th>
-<th style="text-align:center">sign</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">unix</td>
-<td style="text-align:center">\n</td>
-</tr>
-<tr>
-<td style="text-align:center">dos</td>
-<td style="text-align:center">\r\n</td>
-</tr>
-<tr>
-<td style="text-align:center">windows</td>
-<td style="text-align:center">\r\n</td>
-</tr>
-<tr>
-<td style="text-align:center">mac</td>
-<td style="text-align:center">\r</td>
-</tr>
-</tbody>
-</table>
-<p>实际上 <code>\r</code> 代表着回车（ASCII 码为0D）， <code>\n</code> 表示换行符（ASCII码为0A）。<br>所以当把一个文件从一个系统转移到另外的系统时，就会有换行符方面的问题。<br>因为在 windows 中用 <code>\r\n</code> 表示换行，而在 linux 中用 <code>\n</code> 表示，所以这里会多出一个 <code>\r</code> 。</p>
-<p> <strong>解决方法</strong></p>
-<h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一 :"></a>方法一 :</h5><p>在 Vim 中可以使用替换命令进行删除，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\r//g</span><br></pre></td></tr></table></figure></p>
-<p>或者使用下面的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/^M//g</span><br></pre></td></tr></table></figure></p>
-<p>其中 <code>^M</code> 是由 <code>Ctrl + v</code> 和 <code>Ctrl + M</code> 生成的，不要直接用 <code>^</code> 和 <code>M</code>  。</p>
-<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二 :"></a>方法二 :</h5><p>另外,在 linux 下也可以使用 <code>dos2unix</code> 这个工具将 windows 或者 dos 格式的文件转换成 linux 格式的文件,首先需要安装 <code>dos2unix</code> 这个软件,在 ubuntu 下直接运行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install dos2unix</span><br></pre></td></tr></table></figure></p>
-<p>安装成功后直接对文件进行操作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dos2unix filename</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>(EOF)</p>
-
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>由于不同的操作系统采用了不同的换行符，所以当 windows 的文件 copy 到 Linux 之后会发现行尾多出 <code>^M</code> 。<br>
                     
+                        <a href="/2014/12/24/delete-M-in-linux/" class="postShorten-excerpt_link link">
+                            Continue reading
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2014/12/24/delete-M-in-linux/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
                     
                 </div>
             
         </div>
+        
+            <div class="postShorten-thumbnailimg">
+                <img alt="" itemprop="image" src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg"/>
+            </div>
+            
         
     </article>
     
