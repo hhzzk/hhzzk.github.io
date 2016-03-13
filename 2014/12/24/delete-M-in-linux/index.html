@@ -6,25 +6,89 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>Category: 原创 - hhzzk&#39;s blog</title>
+    <title>Linux下删除文件行尾的^M - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
     
     
-    <meta name="description">
+    <meta name="description" content="由于不同的操作系统采用了不同的换行符，所以当 windows 的文件 copy 到 Linux 之后会发现行尾多出 ^M 。
+做编译原理实验时，在vim中打开实验用到的文件发现行尾都带着 ^M 。google之后发现原来这是因为不同的操作系统采用了不同的换行符造成的。在不同的系统上换行符分别如下：
+
+
+
+OS
+sign
+
+
+
+
+unix
+\n
+
+
+dos
+\r\n
+
+
+windows
+\r\n">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="hhzzk's blog">
-<meta property="og:url" content="http://www.hhzzk.xyz/categories/原创/index.html">
+<meta property="og:title" content="Linux下删除文件行尾的^M">
+<meta property="og:url" content="http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description">
+<meta property="og:description" content="由于不同的操作系统采用了不同的换行符，所以当 windows 的文件 copy 到 Linux 之后会发现行尾多出 ^M 。
+做编译原理实验时，在vim中打开实验用到的文件发现行尾都带着 ^M 。google之后发现原来这是因为不同的操作系统采用了不同的换行符造成的。在不同的系统上换行符分别如下：
+
+
+
+OS
+sign
+
+
+
+
+unix
+\n
+
+
+dos
+\r\n
+
+
+windows
+\r\n">
+<meta property="og:updated_time" content="2016-03-13T16:35:37.798Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hhzzk's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Linux下删除文件行尾的^M">
+<meta name="twitter:description" content="由于不同的操作系统采用了不同的换行符，所以当 windows 的文件 copy 到 Linux 之后会发现行尾多出 ^M 。
+做编译原理实验时，在vim中打开实验用到的文件发现行尾都带着 ^M 。google之后发现原来这是因为不同的操作系统采用了不同的换行符造成的。在不同的系统上换行符分别如下：
+
+
+
+OS
+sign
+
+
+
+
+unix
+\n
+
+
+dos
+\r\n
+
+
+windows
+\r\n">
     
     
         
     
     
+    
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg" />
     
     
     
@@ -63,7 +127,7 @@
 
     
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">hhzzk&#39;s blog</a>
@@ -81,7 +145,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="4">
     
     
         <ul class="sidebar-buttons">
@@ -183,121 +247,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    
-
-<section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/04/10/array_top_k_solution/">
-                            一个Top K问题
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Fri Apr 10 2015 20:10:20 GMT+0800">
-	
-		    4月 10, 2015
-    	
-    </time>
+        <div class="post-header main-content-wrap text-left">
     
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/算法系列/">算法系列</a>
-
-
+        <h1 class="post-title" itemprop="headline">
+            Linux下删除文件行尾的^M
+        </h1>
     
-</div>
-            </div>
-            
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>有 20 个数组，每个数组有 500 个元素，并且是有序排列好的，要求在这 20*500 个数中找出排名前 500 的数。<br>
-                    
-                        <a href="/2015/04/10/array_top_k_solution/" class="postShorten-excerpt_link link">
-                            Continue reading
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-            <div class="postShorten-thumbnailimg">
-                <img alt="" itemprop="image" src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg"/>
-            </div>
-            
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2015/04/06/run_progrom_backgroud/">
-                            Linux程序运行时在前后台切换
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Mon Apr 06 2015 09:30:15 GMT+0800">
-	
-		    4月 06, 2015
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/Linux命令系列/">Linux命令系列</a>
-
-
-    
-</div>
-            </div>
-            
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>如何让Linux程序在后台执行，如何将后台执行的程序调入前台执行。<br>
-                    
-                        <a href="/2015/04/06/run_progrom_backgroud/" class="postShorten-excerpt_link link">
-                            Continue reading
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-            <div class="postShorten-thumbnailimg">
-                <img alt="" itemprop="image" src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg"/>
-            </div>
-            
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2014/12/24/delete-M-in-linux/">
-                            Linux下删除文件行尾的^M
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+    <div class="post-meta">
     <time itemprop="datePublished" content="Wed Dec 24 2014 19:50:57 GMT+0800">
 	
 		    12月 24, 2014
@@ -311,16 +275,11 @@
 
     
 </div>
-            </div>
-            
-                <div class="postShorten-thumbnailimg postShorten-thumbnailimg--bottom">
-                    <img alt="" itemprop="image" src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg"/>
-                </div>
-                
-            
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>由于不同的操作系统采用了不同的换行符，所以当 windows 的文件 copy 到 Linux 之后会发现行尾多出 <code>^M</code> 。<br><!-- experct --></p>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>由于不同的操作系统采用了不同的换行符，所以当 windows 的文件 copy 到 Linux 之后会发现行尾多出 <code>^M</code> 。<br><!-- experct --></p>
 <p>做编译原理实验时，在vim中打开实验用到的文件发现行尾都带着 <code>^M</code> 。google之后发现原来这是因为不同的操作系统采用了不同的换行符造成的。在不同的系统上换行符分别如下：</p>
 <table>
 <thead>
@@ -358,125 +317,77 @@
 <hr>
 <p>(EOF)</p>
 
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2014/12/24/delete-M-in-linux/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2014/12/13/0-1_package_dp_arithmetic/">
-                            0-1背包问题的动态规划算法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Sat Dec 13 2014 21:50:54 GMT+0800">
-	
-		    12月 13, 2014
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/算法系列/">算法系列</a>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/Vim/">Vim</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/dos2unix/">dos2unix</a>
 
-
-    
-</div>
             </div>
-            
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>0-1背包问题是最基本的背包问题，本篇介绍了其动态规划的解法。<br>
-                    
-                        <a href="/2014/12/13/0-1_package_dp_arithmetic/" class="postShorten-excerpt_link link">
-                            Continue reading
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
         
-            <div class="postShorten-thumbnailimg">
-                <img alt="" itemprop="image" src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg"/>
-            </div>
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/"  data-tooltip="Linux程序运行时在前后台切换">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/13/0-1_package_dp_arithmetic/" data-tooltip="0-1背包问题的动态规划算法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
             
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2014/10/25/solution_bingding_port80/">
-                            80端口被占用的解决办法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Sat Oct 25 2014 12:46:21 GMT+0800">
-	
-		    10月 25, 2014
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/Linux命令系列/">Linux命令系列</a>
-
-
-    
-</div>
-            </div>
+                <a class="post-action-btn btn btn--default" href="#">
             
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>很多时候80端口被占用，但是通过 netstat 无法查找对应进程所以无法 kill 的情况，可以试试文章中的方法。<br>
-                    
-                        <a href="/2014/10/25/solution_bingding_port80/" class="postShorten-excerpt_link link">
-                            Continue reading
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-            <div class="postShorten-thumbnailimg">
-                <img alt="" itemprop="image" src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg"/>
-            </div>
-            
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">page 1 of 1</li>
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -487,6 +398,83 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/"  data-tooltip="Linux程序运行时在前后台切换">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/13/0-1_package_dp_arithmetic/" data-tooltip="0-1背包问题的动态规划算法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/24/delete-M-in-linux/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
         
@@ -521,6 +509,8 @@
     <!--SCRIPTS-->
 <script src="/assets/js/scrip-rjanlllosg30d03qrddpwrs6wqf4k3v0bbo68hiifuvthyhqfefx2htcagu0.min.js"></script>
 <!--SCRIPTS END-->
+
+    
 
 
 
