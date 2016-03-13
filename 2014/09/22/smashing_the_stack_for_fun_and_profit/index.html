@@ -6,14 +6,14 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>&quot;Smashing The Stack For Fun And Profit&quot;解读 - hhzzk&#39;s blog</title>
+    <title>&quot;Smashing The Stack For Fun And Profit&quot; 解读 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
     
     
     <meta name="description" content="文章翻译解读了 Alpha One 关于堆栈溢出的论文 “Smashing The Stack For Fun And Profit”。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content=""Smashing The Stack For Fun And Profit"解读">
+<meta property="og:title" content=""Smashing The Stack For Fun And Profit" 解读">
 <meta property="og:url" content="http://www.hhzzk.xyz/2014/09/22/smashing_the_stack_for_fun_and_profit/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
 <meta property="og:description" content="文章翻译解读了 Alpha One 关于堆栈溢出的论文 “Smashing The Stack For Fun And Profit”。">
@@ -32,9 +32,9 @@
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/9d15fcebgw1eroq0u58udj209d05wjri.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/9d15fcebgw1eroq12i87bj20he066dg1.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/9d15fcebgw1eroq1xsp1mj20hx04w74g.jpg">
-<meta property="og:updated_time" content="2016-03-13T15:16:10.842Z">
+<meta property="og:updated_time" content="2016-03-13T15:33:46.618Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=""Smashing The Stack For Fun And Profit"解读">
+<meta name="twitter:title" content=""Smashing The Stack For Fun And Profit" 解读">
 <meta name="twitter:description" content="文章翻译解读了 Alpha One 关于堆栈溢出的论文 “Smashing The Stack For Fun And Profit”。">
 <meta name="twitter:image" content="http://ww2.sinaimg.cn/large/9d15fcebgw1erolno1lo8j20cr0amt8w.jpg">
     
@@ -114,7 +114,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
-                    <span class="sidebar-button-desc">Accueil</span>
+                    <span class="sidebar-button-desc">Home</span>
                 </a>
         </li>
         
@@ -150,7 +150,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
-                    <span class="sidebar-button-desc">Archive</span>
+                    <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
         
@@ -162,7 +162,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-search"></i>
-                    <span class="sidebar-button-desc">Rechercher</span>
+                    <span class="sidebar-button-desc">Search</span>
                 </a>
         </li>
         
@@ -174,7 +174,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
-                    <span class="sidebar-button-desc">À propos</span>
+                    <span class="sidebar-button-desc">About</span>
                 </a>
         </li>
         
@@ -214,17 +214,17 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            &quot;Smashing The Stack For Fun And Profit&quot;解读
+            &quot;Smashing The Stack For Fun And Profit&quot; 解读
         </h1>
     
     <div class="post-meta">
     <time itemprop="datePublished" content="Mon Sep 22 2014 00:46:21 GMT+0800">
 	
-		    22 9月 2014
+		    9月 22, 2014
     	
     </time>
     
-        <span>dans </span>
+        <span>in </span>
         
     <a class="category-link" href="/categories/翻译/">翻译</a>
 
@@ -235,11 +235,10 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt --></p>
-<p>&emsp;&emsp;堆栈溢出攻击是黑客攻击中最常用的攻击手段，臭名昭著的Morris worm是世界上第一个用到堆栈溢出攻击的病毒，据统计在1988年破坏了6000台主机。而在8年之后的1996年，Alpha One 通过发表在Phrack杂志上的论文 “Smashing The Stack For Fun And Profit” 让堆栈溢出攻击的原理公开，从此这一攻击手法变成了黑客“入门级别”。</p>
+            <!-- excerpt --><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-简介："><span class="toc-text">一.简介：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-进程在内存中的组织方式："><span class="toc-text">二.进程在内存中的组织方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-what-is-a-stack-amp-why-do-we-use-a-stack"><span class="toc-text">2.1 what is a stack & why do we use a stack</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-The-Stack-Region"><span class="toc-text">2.2 The Stack Region</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-缓冲区溢出"><span class="toc-text">三.缓冲区溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四-shell-code"><span class="toc-text">四.shell code</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五-攻击程序"><span class="toc-text">五.攻击程序</span></a></li></ol><br>&emsp;&emsp;堆栈溢出攻击是黑客攻击中最常用的攻击手段，臭名昭著的Morris worm是世界上第一个用到堆栈溢出攻击的病毒，据统计在1988年破坏了6000台主机。而在8年之后的1996年，Alpha One 通过发表在Phrack杂志上的论文 “Smashing The Stack For Fun And Profit” 让堆栈溢出攻击的原理公开，从此这一攻击手法变成了黑客“入门级别”。</p>
 <p>&emsp;&emsp;因为课程安排要求读这个paper，所以逐段做解读：</p>
-<p>####一.简介：<br>&emsp;&emsp;在这一部分中讲到了写这篇论文的原因，论文要阐明的事情即什么是缓冲区溢出以及缓冲区溢出攻击是怎么工作的.论文中实验环境是x86和linux系统。</p>
-<p>####二.进程在内存中的组织方式：<br>&emsp;&emsp;这一部分是讲进程在内存中的组织形式。进程在内存中区分成三个区域：代码段（Text）、数据段（Data）和堆栈（Stack）。由上图可以看到在内存中的分布是由低地址到高地址。实际上这里他只是做了一个简单的介绍，程序在内存中的分配要复杂的多，下面的图更详细一些（出自《UNIX环境高级编程》）：</p>
+<h4 id="一-简介："><a href="#一-简介：" class="headerlink" title="一.简介："></a>一.简介：</h4><p>&emsp;&emsp;在这一部分中讲到了写这篇论文的原因，论文要阐明的事情即什么是缓冲区溢出以及缓冲区溢出攻击是怎么工作的.论文中实验环境是x86和linux系统。</p>
+<h4 id="二-进程在内存中的组织方式："><a href="#二-进程在内存中的组织方式：" class="headerlink" title="二.进程在内存中的组织方式："></a>二.进程在内存中的组织方式：</h4><p>&emsp;&emsp;这一部分是讲进程在内存中的组织形式。进程在内存中区分成三个区域：代码段（Text）、数据段（Data）和堆栈（Stack）。由上图可以看到在内存中的分布是由低地址到高地址。实际上这里他只是做了一个简单的介绍，程序在内存中的分配要复杂的多，下面的图更详细一些（出自《UNIX环境高级编程》）：</p>
 <p><img src="http://ww2.sinaimg.cn/large/9d15fcebgw1erolno1lo8j20cr0amt8w.jpg" alt="stack"></p>
 <p>各段中存放的内容如下：</p>
 <ul>
@@ -255,8 +254,8 @@
 <li>对于代码段只有读和执行的权限，对于数据段只有读写的权限。当对他们做了非法的操作时便会出现段错误。</li>
 <li>对于代码段和数据段在程序编译时就已经分配好，而堆和栈是在程序运行时才进行分配的。</li>
 </ol>
-<p>#####2.1 what is a stack &amp; why do we use a stack<br>&emsp;&emsp;这一部分是讲栈的性质也就是先进后出。但是我们为什么要用到栈，因为现代计算机的设计都是需要高级语言的，而高级语言的主要技术特性就是过程和函数。在程序运行时会调用函数，这就像jump指令一样，但是不同于jump的是，被调用的函数执行完之后，还要返回到之前的语句继续执行，这就用到了栈的先进先出的性质。</p>
-<p>#####2.2 The Stack Region<br>&emsp;&emsp;栈是包含数据的连续的内存块，寄存器SP指向栈顶，栈底是固定的地址。他的大小在程序运行时自动变化。cpu执行push和pop指令。栈由逻辑堆栈帧组成，当调用函数时他会被push，返回时会被pop。一个堆栈帧由以下几部分组成：</p>
+<h5 id="2-1-what-is-a-stack-amp-why-do-we-use-a-stack"><a href="#2-1-what-is-a-stack-amp-why-do-we-use-a-stack" class="headerlink" title="2.1 what is a stack &amp; why do we use a stack"></a>2.1 what is a stack &amp; why do we use a stack</h5><p>&emsp;&emsp;这一部分是讲栈的性质也就是先进后出。但是我们为什么要用到栈，因为现代计算机的设计都是需要高级语言的，而高级语言的主要技术特性就是过程和函数。在程序运行时会调用函数，这就像jump指令一样，但是不同于jump的是，被调用的函数执行完之后，还要返回到之前的语句继续执行，这就用到了栈的先进先出的性质。</p>
+<h5 id="2-2-The-Stack-Region"><a href="#2-2-The-Stack-Region" class="headerlink" title="2.2 The Stack Region"></a>2.2 The Stack Region</h5><p>&emsp;&emsp;栈是包含数据的连续的内存块，寄存器SP指向栈顶，栈底是固定的地址。他的大小在程序运行时自动变化。cpu执行push和pop指令。栈由逻辑堆栈帧组成，当调用函数时他会被push，返回时会被pop。一个堆栈帧由以下几部分组成：</p>
 <ul>
 <li>函数的返回地址和参数</li>
 <li>临时变量：包括函数的非静态局部变量以及编译器自动生成的其他临时变量</li>
@@ -276,7 +275,7 @@
 <p>注意，因为有内存对齐的原因这里的空间是增加20个字节而不是15个字节。</p>
 <p>所以这个堆栈帧的情况如下：</p>
 <p><img src="http://ww3.sinaimg.cn/large/9d15fcebgw1erolqaoeq7j20h703mwef.jpg" alt="stack_function"></p>
-<p>####三.缓冲区溢出<br>&emsp;&emsp;缓冲区溢出是因为向缓冲区中装入了过多的数据，从而导致其溢出。怎么样利用这一常见的程序错误去执行任意的代码呢？看下面的例子：</p>
+<h4 id="三-缓冲区溢出"><a href="#三-缓冲区溢出" class="headerlink" title="三.缓冲区溢出"></a>三.缓冲区溢出</h4><p>&emsp;&emsp;缓冲区溢出是因为向缓冲区中装入了过多的数据，从而导致其溢出。怎么样利用这一常见的程序错误去执行任意的代码呢？看下面的例子：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//example2.c</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">(<span class="keyword">char</span> *str)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">16</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(buffer,str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> large_string[<span class="number">256</span>];</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; <span class="number">255</span>; i++)</span><br><span class="line">        large_string[i] = <span class="string">'A'</span>;</span><br><span class="line"> </span><br><span class="line">    function(large_string);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;上面的函数 <code>function()</code> 存在缓冲区溢出的错误，他直接用了 <code>strcpy()</code> 函数，没用用 <code>strncpy()</code> 函数进行拷贝字节的大小判断。如果执行上边的程序将会出现段错误。当我们调用函数时，栈的情况类似于下面这种：</p>
 <p><img src="http://ww3.sinaimg.cn/large/9d15fcebgw1erom17rtlfj20hg03s3yf.jpg" alt="stack_funciton_2"></p>
@@ -287,8 +286,7 @@
 <p>例子中我们用buffer1加上12得到ret的值，函数返回值即存储在ret中，然后让ret的内容加8跳过x=1赋值语句直接执行printf函数。那么我们是怎么知道加8的呢？借用gdb：</p>
 <p><img src="http://ww2.sinaimg.cn/large/9d15fcebgw1erom229z6vj20i10c1myd.jpg" alt="gdb1"></p>
 <p>可以看到之前的 <code>ret</code> 值是 <code>0x80004a8</code> ，我们跳过赋值语句直接执行 <code>0x80004b2</code> ，两者相减得8（应该是10）.</p>
-<p>####四.shell code</p>
-<p>&emsp;&emsp;所以，现在我们可以修改函数的返回地址，改变程序执行的流程，那么我们要执行什么样的程序呢？在大部分情况下我们仅仅想要启动一个shell，然后我们可以在这个shell上随便执行我们的命令。但是如果程序中没有这样的代码怎么办？当然是我们自己开发，但是这段代码要放在那里呢？答案是溢出的缓冲区，并且要重写ret的值让其指向这段有我们代码的缓冲区。就下面的情况，栈顶在 <code>0xFF</code> ，我们想要执行缓冲区中的代码S：</p>
+<h4 id="四-shell-code"><a href="#四-shell-code" class="headerlink" title="四.shell code"></a>四.shell code</h4><p>&emsp;&emsp;所以，现在我们可以修改函数的返回地址，改变程序执行的流程，那么我们要执行什么样的程序呢？在大部分情况下我们仅仅想要启动一个shell，然后我们可以在这个shell上随便执行我们的命令。但是如果程序中没有这样的代码怎么办？当然是我们自己开发，但是这段代码要放在那里呢？答案是溢出的缓冲区，并且要重写ret的值让其指向这段有我们代码的缓冲区。就下面的情况，栈顶在 <code>0xFF</code> ，我们想要执行缓冲区中的代码S：</p>
 <p><img src="http://ww1.sinaimg.cn/large/9d15fcebgw1eropzvh3z6j20he07iq36.jpg" alt="code1"></p>
 <p>这段启动shell的代码被称为shell code，在C中shell code类似这样：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//shellcode.c:</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> stdio.h</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *name[<span class="number">2</span>];</span><br><span class="line">    name[<span class="number">0</span>] = <span class="string">"/bin/sh"</span>;</span><br><span class="line">    name[<span class="number">1</span>] = <span class="literal">NULL</span>;</span><br><span class="line">    execve(name[<span class="number">0</span>], name, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -311,7 +309,7 @@ c)执行指令int x80
 <p>将汇编指令翻译成二进制的代码，并且将其中\x00的代码进行替换，于是得到下面的程序：</p>
 <p><img src="http://ww3.sinaimg.cn/large/9d15fcebgw1eroq12i87bj20he066dg1.jpg" alt="code3"></p>
 <p>运行程序可以看到轻松得到shell。</p>
-<p>####五.攻击程序<br>现在我们有了一个shellcode，当我们发现有缓冲区溢出的程序时，就可以将这段shell代码当作字符串输入程序中，从而得到shell。但是这里存在一个问题就是返回地址（ret）必须是一个绝对的地址，而且一定要指向shellcode的起始位置，这就比较麻烦。而在Alpha One的文章中也没提到很好的办法，所以我们只能用猜的方法。但是有一个提高命中率的方法在文章中提到，例如我们的缓冲区有512字节，而shellcode只有20字节，那么我们可以在shellcode之前全部填充上NOP指令，这样只要ret指向了NOP就可以执行到shellconde。可以见下图：</p>
+<h4 id="五-攻击程序"><a href="#五-攻击程序" class="headerlink" title="五.攻击程序"></a>五.攻击程序</h4><p>现在我们有了一个shellcode，当我们发现有缓冲区溢出的程序时，就可以将这段shell代码当作字符串输入程序中，从而得到shell。但是这里存在一个问题就是返回地址（ret）必须是一个绝对的地址，而且一定要指向shellcode的起始位置，这就比较麻烦。而在Alpha One的文章中也没提到很好的办法，所以我们只能用猜的方法。但是有一个提高命中率的方法在文章中提到，例如我们的缓冲区有512字节，而shellcode只有20字节，那么我们可以在shellcode之前全部填充上NOP指令，这样只要ret指向了NOP就可以执行到shellconde。可以见下图：</p>
 <p><img src="http://ww4.sinaimg.cn/large/9d15fcebgw1eroq1xsp1mj20hx04w74g.jpg" alt="stack_function5"></p>
 <p>N代表NOP指令，S代表shellcode。如上图，只要ret指向了0x/D8 – 0x/E3 shellcode都可以被执行。</p>
 <hr>
@@ -322,7 +320,7 @@ c)执行指令int x80
     <div id="post-footer" class="post-footer main-content-wrap">
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">TAGGÉ DANS</span><br/>
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
     <a class="tag tag--primary tag--small t-link" href="/all-tags/buffer-overflow/">buffer overflow</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/栈溢出/">栈溢出</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/黑客/">黑客</a>
 
@@ -336,14 +334,14 @@ c)执行指令int x80
                     <a class="post-action-btn btn btn--default tooltip--top" href="/2014/10/25/solution_bingding_port80/"  data-tooltip="80端口被占用的解决办法">
                 
                     <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">PRÉCÉDENT</span>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                 </a>
             </li>
             <li class="post-action">
                 
                     <a class="post-action-btn btn btn--disabled">
                 
-                    <span class="hide-xs hide-sm text-small icon-mr">SUIVANT</span>
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
                 </a>
             </li>
@@ -373,7 +371,7 @@ c)执行指令int x80
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
             
                 <i class="fa fa-list"></i>
             </a>
@@ -407,14 +405,14 @@ c)执行指令int x80
                     <a class="post-action-btn btn btn--default tooltip--top" href="/2014/10/25/solution_bingding_port80/"  data-tooltip="80端口被占用的解决办法">
                 
                     <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">PRÉCÉDENT</span>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
                 </a>
             </li>
             <li class="post-action">
                 
                     <a class="post-action-btn btn btn--disabled">
                 
-                    <span class="hide-xs hide-sm text-small icon-mr">SUIVANT</span>
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
                 </a>
             </li>
@@ -444,7 +442,7 @@ c)执行指令int x80
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
             
                 <i class="fa fa-list"></i>
             </a>
@@ -458,17 +456,17 @@ c)执行指令int x80
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/09/22/smashing_the_stack_for_fun_and_profit/">
-                <i class="fa fa-google-plus"></i><span class="">Partager sur Google Plus</span>
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/09/22/smashing_the_stack_for_fun_and_profit/">
-                <i class="fa fa-facebook-official"></i><span>Partager sur Facebook</span>
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/09/22/smashing_the_stack_for_fun_and_profit/">
-                <i class="fa fa-twitter"></i><span>Partager sur Twitter</span>
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
     </ul>
