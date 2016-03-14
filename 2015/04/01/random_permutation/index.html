@@ -6,29 +6,29 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>Linux程序运行时在前后台切换 - hhzzk&#39;s blog</title>
+    <title>随机排列 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
     
     
-    <meta name="description" content="如何让Linux程序在后台执行，如何将后台执行的程序调入前台执行。">
+    <meta name="description" content="随机排列的讲解及代码实现">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Linux程序运行时在前后台切换">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/index.html">
+<meta property="og:title" content="随机排列">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/04/01/random_permutation/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="如何让Linux程序在后台执行，如何将后台执行的程序调入前台执行。">
-<meta property="og:updated_time" content="2016-03-13T16:05:08.062Z">
+<meta property="og:description" content="随机排列的讲解及代码实现">
+<meta property="og:updated_time" content="2016-03-14T02:51:58.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux程序运行时在前后台切换">
-<meta name="twitter:description" content="如何让Linux程序在后台执行，如何将后台执行的程序调入前台执行。">
+<meta name="twitter:title" content="随机排列">
+<meta name="twitter:description" content="随机排列的讲解及代码实现">
     
     
         
     
     
     
-        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/8340578.jpg" />
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg" />
     
     
     
@@ -198,19 +198,19 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Linux程序运行时在前后台切换
+            随机排列
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Mon Apr 06 2015 09:30:15 GMT+0800">
+    <time itemprop="datePublished" content="Wed Apr 01 2015 11:05:57 GMT+0800">
 	
-		    4月 06, 2015
+		    4月 01, 2015
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/Linux命令系列/">Linux命令系列</a>
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/算法系列/">算法系列</a>
 
 
     
@@ -220,14 +220,20 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <!-- excerpt --></p>
-<p>1、在Linux终端执行命令时，在命令末尾加上符号 &amp;，就可以让程序在后台运行, 例如,在我的ubuntu上运行 <code>hexo s</code> ,可以看到如下的效果,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/blog$ hexo s &amp;</span><br><span class="line">[1] 26421</span><br><span class="line">king@king:~/blog$ INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br><span class="line"></span><br><span class="line">king@king:~/blog$ </span><br><span class="line">king@king:~/blog$</span><br></pre></td></tr></table></figure></p>
-<p>执行命令之后,程序进入后台运行,并且返回进程号.</p>
-<p>2、如果程序正在前台运行，可以使用 <code>Ctrl+z</code> 选项把程序暂停，然后用 <code>bg %[number]</code> 命令把这个程序放到后台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/blog$ hexo s</span><br><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br><span class="line">^Z</span><br><span class="line">[1]+  Stopped                 hexo s</span><br><span class="line">king@king:~/blog$ bg %1</span><br><span class="line">[1]+ hexo s &amp;</span><br><span class="line">king@king:~/blog$</span><br></pre></td></tr></table></figure></p>
-<p><code>Ctrl+z</code> 之后会返回响应的number.</p>
-<p>3、对于所有运行的程序，我们可以用jobs –l 指令查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/blog$ jobs -l</span><br><span class="line">[1]+ 27061 Running                 hexo s &amp;</span><br><span class="line">king@king:~/blog$</span><br></pre></td></tr></table></figure></p>
-<p>4、也可以用 fg %[number] 指令把一个程序掉到前台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/blog$ fg %1</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></p>
-<p>5、如果在退出帐户/关闭终端之后想要继续运行相应的进程,需要用到nohup命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/blog$ nohup hexo s &amp;</span><br><span class="line">[1] 31260</span><br><span class="line">king@king:~/blog$ nohup: ignoring input and appending output to ‘nohup.out’</span><br><span class="line"></span><br><span class="line">king@king:~/blog$</span><br></pre></td></tr></table></figure></p>
-<p>并且他会把程序的输出重定向到nohup.out文件中</p>
+<p><strong>问题描述</strong></p>
+<blockquote>
+<p>有1到n的n个数，对其进行随机排列组合，每一种排列组合的概率都为 <code>1/n!</code> 。要求不能使用额外的空间，可以使用random（int min， int max）函数，此函数表示产生一个min到max之间的随机数。</p>
+</blockquote>
+<p>题目中主要有两点：</p>
+<ol>
+<li>从1到n肯定不能有重复；</li>
+<li>每一个数出现的概率必须相同。</li>
+</ol>
+<p><strong>做法</strong><br>数组元素为array[n] = {1, 2, 3 … n}。</p>
+<p>第一步，随机的产生0到n-1的随机数r0，然后将 <code>array[r0]</code> 与第一个元素 <code>array[0]</code> 交换；<br>第二步， 随机的产生1到n-1的随机数r1，然后将 <code>array[r1]</code> 与第一个元素 <code>array[1]</code> 交换；<br>…<br>…<br>第n-1步，随机的产生n-2到n-1的随机数r(n-2)，然后将 <code>array[r(n-2)]</code> 与第一个元素 <code>array[n-2]</code> 交换；<br>第n步，不用交换了</p>
+<p>这样产生的随机排列组合的概率一定是1/n!。</p>
+<p><strong>代码如下</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">randomPermutation</span><span class="params">(<span class="built_in">array</span>, <span class="keyword">int</span> count)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; ++i) &#123;</span><br><span class="line">        swap(<span class="built_in">array</span>[i], <span class="built_in">array</span>[random(i, count)]);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>(EOF)</p>
             
@@ -238,7 +244,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/算法/">算法</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/随机排列/">随机排列</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/面试题/">面试题</a>
 
             </div>
         
@@ -247,7 +253,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/10/array_top_k_solution/"  data-tooltip="一个Top K问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/"  data-tooltip="Linux程序运行时在前后台切换">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -255,7 +261,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/random_permutation/" data-tooltip="随机排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /" data-tooltip="递归实现全排列">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -270,17 +276,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -318,7 +324,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/10/array_top_k_solution/"  data-tooltip="一个Top K问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/"  data-tooltip="Linux程序运行时在前后台切换">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -326,7 +332,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/random_permutation/" data-tooltip="随机排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /" data-tooltip="递归实现全排列">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -341,17 +347,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -371,17 +377,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/06/run_progrom_backgroud/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
