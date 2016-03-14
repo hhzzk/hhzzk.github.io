@@ -6,21 +6,21 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>80端口被占用的解决办法 - hhzzk&#39;s blog</title>
+    <title>如何在Ubuntu上安装Eclipse 4.4 (Luna) - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
     
     
-    <meta name="description" content="很多时候80端口被占用，但是通过 netstat 无法查找对应进程所以无法 kill 的情况，可以试试文章中的方法。">
+    <meta name="description" content="在 Ubuntu 上安装 Eclipse 并且固定在启动栏中">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="80端口被占用的解决办法">
-<meta property="og:url" content="http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/index.html">
+<meta property="og:title" content="如何在Ubuntu上安装Eclipse 4.4 (Luna)">
+<meta property="og:url" content="http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="很多时候80端口被占用，但是通过 netstat 无法查找对应进程所以无法 kill 的情况，可以试试文章中的方法。">
-<meta property="og:updated_time" content="2016-03-13T16:06:26.746Z">
+<meta property="og:description" content="在 Ubuntu 上安装 Eclipse 并且固定在启动栏中">
+<meta property="og:updated_time" content="2016-03-14T13:37:38.412Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="80端口被占用的解决办法">
-<meta name="twitter:description" content="很多时候80端口被占用，但是通过 netstat 无法查找对应进程所以无法 kill 的情况，可以试试文章中的方法。">
+<meta name="twitter:title" content="如何在Ubuntu上安装Eclipse 4.4 (Luna)">
+<meta name="twitter:description" content="在 Ubuntu 上安装 Eclipse 并且固定在启动栏中">
     
     
         
@@ -198,13 +198,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            80端口被占用的解决办法
+            如何在Ubuntu上安装Eclipse 4.4 (Luna)
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Sat Oct 25 2014 12:46:21 GMT+0800">
+    <time itemprop="datePublished" content="Sun Dec 07 2014 15:50:57 GMT+0800">
 	
-		    10月 25, 2014
+		    12月 07, 2014
     	
     </time>
     
@@ -220,16 +220,13 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <!-- excerpt --></p>
-<p>&emsp;&emsp;做信息安全实验的时候80端口总是无法绑定，一直在报绑定错误。谷歌之后大部分的解决办法都是 <code>netstat -apn | grep 80</code>  ，找到相应的进程号，然后kill掉。但试过之后显示如下：</p>
-<pre><code>tcp 0 0 0.0.0.0:80 0.0.0.0:* LISTEN
-</code></pre><p>可以看到80端口确实被占用，但是没有显示具体哪一个进程正在占用，所以无法kill掉。继续搜索发现有一条命令是这样: </p>
-<pre><code>sudo fuser -k 80/tcp
-</code></pre><p>试过之后果然可以。</p>
-<p>Tips: </p>
-<ul>
-<li>小于1024的端口是专用端口，所以如果要想绑定到自己的程序上必须获取最高权限，Ubuntu下使用sudo。</li>
-<li>fuser用途：查询给定文件或目录的用户或进程信息。</li>
-</ul>
+<h4 id="第一步：下载"><a href="#第一步：下载" class="headerlink" title="第一步：下载"></a>第一步：下载</h4><p>&emsp;&emsp;在Eclipse官网下载安装包：<a href="http://www.eclipse.org/downloads/" target="_blank" rel="external">链接</a>，依次点击：`“Linux” 32-bit 或者 64-bit ⇒ “Eclipse IDE for Java Developers” (或者 “Eclipse Standard|Classic”) for Java SE program development; 或者 “Eclipse IDE for Java EE Developers” for developing webapps. 下载之后会得到一个类似于“eclipse-jee-luna-R-linux-gtk-x86_64.tar.gz“的文件。</p>
+<h4 id="第二步：安装"><a href="#第二步：安装" class="headerlink" title="第二步：安装"></a>第二步：安装</h4><p>&emsp;&emsp;依次执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// Unzip the tarball into /usr/local</span><br><span class="line">$ cd /usr/local</span><br><span class="line">$ sudo tar xzvf ~/Downloads/eclipse-jee-luna-R-linux-gtk-x86_64.tar.gz</span><br><span class="line">      // Extract the downloaded package</span><br><span class="line">      // x: extract, z: for unzipping gz, v: verbose, f: filename</span><br><span class="line">      // You can also unzip in &quot;File Explorer&quot; by double-clicking the tarball.</span><br><span class="line"> </span><br><span class="line">// Change ownership</span><br><span class="line">$ cd /usr/local</span><br><span class="line">$ sudo chown -R your-username:your-groupname eclipse</span><br><span class="line">      // Change ownership to your chosen username and groupname</span><br><span class="line">      // -R recursive</span><br><span class="line"> </span><br><span class="line">// Set up a symlink</span><br><span class="line">$ cd /usr/bin</span><br><span class="line">$ sudo ln -s /usr/local/eclipse/eclipse</span><br><span class="line">      // Make a symlink in /usr/bin, which is in the PATH.</span><br><span class="line">$ ls -ld eclipse</span><br><span class="line">lrwxrwxrwx 1 root root 26 Aug 30 11:53 eclipse -&gt; /usr/local/eclipse/eclipse</span><br><span class="line">$ which eclipse</span><br><span class="line">/usr/bin/eclipse</span><br><span class="line">$ whereis eclipse</span><br><span class="line">eclipse: /usr/bin/eclipse /usr/bin/X11/eclipse /usr/local/eclipse</span><br></pre></td></tr></table></figure>
+<p>安装完成，要想运行eclipse可以打开 <code>“/usr/local/eclipse“</code>目录，点击eclipse图标或者打开一个终端输入eclipse。</p>
+<h4 id="第三步：启动栏"><a href="#第三步：启动栏" class="headerlink" title="第三步：启动栏"></a>第三步：启动栏</h4><p>&emsp;&emsp;要想将eclipse放置在启动栏上，首先在桌面创建文件eclipse.desktop，然后输入以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=Eclipse </span><br><span class="line">Type=Application</span><br><span class="line">Exec=eclipse</span><br><span class="line">Terminal=false</span><br><span class="line">Icon=/usr/local/eclipse/icon.xpm</span><br><span class="line">Comment=Integrated Development Environment</span><br><span class="line">NoDisplay=false</span><br><span class="line">Categories=Development;IDE;</span><br><span class="line">Name[en]=Eclipse</span><br></pre></td></tr></table></figure>
+<p>保存之后文件就会变成eclipse图标，右击此图标，选择 <code>lock to launcher</code>。</p>
 <hr>
 <p>(EOF)</p>
             
@@ -240,7 +237,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/80端口/">80端口</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/fuser/">fuser</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Eclipse安装/">Eclipse安装</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/ubuntu/">ubuntu</a>
 
             </div>
         
@@ -249,7 +246,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/07/install_eclipse_in_ubuntu/"  data-tooltip="如何在Ubuntu上安装Eclipse 4.4 (Luna)">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/13/0-1_package_dp_arithmetic/"  data-tooltip="0-1背包问题的动态规划算法">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -257,7 +254,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/09/22/smashing_the_stack_for_fun_and_profit/" data-tooltip="&quot;Smashing The Stack For Fun And Profit&quot; 解读">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/10/25/solution_bingding_port80/" data-tooltip="80端口被占用的解决办法">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -272,17 +269,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -320,7 +317,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/07/install_eclipse_in_ubuntu/"  data-tooltip="如何在Ubuntu上安装Eclipse 4.4 (Luna)">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/13/0-1_package_dp_arithmetic/"  data-tooltip="0-1背包问题的动态规划算法">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -328,7 +325,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/09/22/smashing_the_stack_for_fun_and_profit/" data-tooltip="&quot;Smashing The Stack For Fun And Profit&quot; 解读">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/10/25/solution_bingding_port80/" data-tooltip="80端口被占用的解决办法">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -343,17 +340,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -373,17 +370,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/10/25/solution_bingding_port80/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/12/07/install_eclipse_in_ubuntu/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
