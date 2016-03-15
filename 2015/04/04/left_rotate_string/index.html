@@ -6,23 +6,23 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>随机排列 - hhzzk&#39;s blog</title>
+    <title>字符串左移、字符串旋转 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
         <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
     
     
     
-    <meta name="description" content="随机排列的讲解及代码实现">
+    <meta name="description" content="时间复杂度为O(n),空间复杂度为O(1)的要求下左移字符串。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="随机排列">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/04/01/random_permutation/index.html">
+<meta property="og:title" content="字符串左移、字符串旋转">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/04/04/left_rotate_string/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="随机排列的讲解及代码实现">
-<meta property="og:updated_time" content="2016-03-14T02:51:58.345Z">
+<meta property="og:description" content="时间复杂度为O(n),空间复杂度为O(1)的要求下左移字符串。">
+<meta property="og:updated_time" content="2016-03-15T13:26:41.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="随机排列">
-<meta name="twitter:description" content="随机排列的讲解及代码实现">
+<meta name="twitter:title" content="字符串左移、字符串旋转">
+<meta name="twitter:description" content="时间复杂度为O(n),空间复杂度为O(1)的要求下左移字符串。">
     
     
         
@@ -215,13 +215,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            随机排列
+            字符串左移、字符串旋转
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Wed Apr 01 2015 11:05:57 GMT+0800">
+    <time itemprop="datePublished" content="Sat Apr 04 2015 16:54:57 GMT+0800">
 	
-		    Apr 01, 2015
+		    Apr 04, 2015
     	
     </time>
     
@@ -237,20 +237,20 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <!-- excerpt --></p>
-<p><strong>问题描述</strong></p>
+<p><strong>题目</strong></p>
 <blockquote>
-<p>有1到n的n个数，对其进行随机排列组合，每一种排列组合的概率都为 <code>1/n!</code> 。要求不能使用额外的空间，可以使用random（int min， int max）函数，此函数表示产生一个min到max之间的随机数。</p>
+<p>字符串左移:<br>void <em>pszStringRotate( char </em>pszString, int nCharsRotate)<br>比如ABCDEFG，移3位变DEFGABC，要求空间复杂度O（1），时间复杂度O（n）。</p>
 </blockquote>
-<p>题目中主要有两点：</p>
+<p>题目的要求其实就是把字符串前面的几位移动到字符串的后面，如果题目没有时间复杂度和空间复杂度的要求当然很简单，既可以一位一位的移动，靠牺牲时间来实现，也可以新开辟一个空间，靠牺牲空间来实现。</p>
+<p>为了满足时间和空间的要求，可以采用下面这种三步反转的方法：</p>
 <ol>
-<li>从1到n肯定不能有重复；</li>
-<li>每一个数出现的概率必须相同。</li>
+<li>将字符串分为两部分：ABC 和 DEFG</li>
+<li>将这两部分分别反转：CBA 和 GFED</li>
+<li>将分别反转后的字符串整个反转：DEFGABC</li>
 </ol>
-<p><strong>做法</strong><br>数组元素为array[n] = {1, 2, 3 … n}。</p>
-<p>第一步，随机的产生0到n-1的随机数r0，然后将 <code>array[r0]</code> 与第一个元素 <code>array[0]</code> 交换；<br>第二步， 随机的产生1到n-1的随机数r1，然后将 <code>array[r1]</code> 与第一个元素 <code>array[1]</code> 交换；<br>…<br>…<br>第n-1步，随机的产生n-2到n-1的随机数r(n-2)，然后将 <code>array[r(n-2)]</code> 与第一个元素 <code>array[n-2]</code> 交换；<br>第n步，不用交换了</p>
-<p>这样产生的随机排列组合的概率一定是1/n!。</p>
-<p><strong>代码如下</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">randomPermutation</span><span class="params">(<span class="built_in">array</span>, <span class="keyword">int</span> count)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; ++i) &#123;</span><br><span class="line">        swap(<span class="built_in">array</span>[i], <span class="built_in">array</span>[random(i, count)]);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就得到了想要的结果</p>
+<p>代码实现（引用自July）<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">voidReverseString(<span class="keyword">char</span>* s,<span class="keyword">int</span> from,<span class="keyword">int</span> to)</span><br><span class="line">&#123; <span class="keyword">while</span> (from &lt; to)</span><br><span class="line">    &#123; <span class="keyword">char</span> t = s[from];</span><br><span class="line">        s[from++] = s[to];</span><br><span class="line">        s[to--] = t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line">voidLeftRotateString(<span class="keyword">char</span>* s,<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//若要左移动大于n位，那么和%n 是等价的</span></span><br><span class="line">    m %= n;</span><br><span class="line">    <span class="comment">//反转[0..m - 1]，套用到上面举的例子中，就是X-&gt;X^T，即 abc-&gt;cba</span></span><br><span class="line">    ReverseString(s, <span class="number">0</span>, m - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//反转[m..n - 1]，例如Y-&gt;Y^T，即 def-&gt;fed</span></span><br><span class="line">    ReverseString(s, m, n - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//反转[0..n - 1]，即如整个反转，(X^TY^T)^T=YX，即 cbafed-&gt;defabc。</span></span><br><span class="line">    ReverseString(s, <span class="number">0</span>, n - <span class="number">1</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个算法既满足空间复杂度O(1),又满足时间复杂度O(n).</p>
 <hr>
 <p>(EOF)</p>
             
@@ -261,7 +261,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/算法/">算法</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/随机排列/">随机排列</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/面试题/">面试题</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/字符串旋转/">字符串旋转</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/算法/">算法</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/面试题/">面试题</a>
 
             </div>
         
@@ -270,7 +270,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/04/left_rotate_string/"  data-tooltip="字符串左移、字符串旋转">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/"  data-tooltip="Linux程序运行时在前后台切换">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -278,7 +278,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /" data-tooltip="递归实现全排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/random_permutation/" data-tooltip="随机排列">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -293,17 +293,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -341,7 +341,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/04/left_rotate_string/"  data-tooltip="字符串左移、字符串旋转">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/"  data-tooltip="Linux程序运行时在前后台切换">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -349,7 +349,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /" data-tooltip="递归实现全排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/random_permutation/" data-tooltip="随机排列">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -364,17 +364,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -394,17 +394,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/random_permutation/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/04/left_rotate_string/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
