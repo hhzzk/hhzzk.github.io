@@ -6,27 +6,23 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>oracle和mysql中substr的区别 - hhzzk&#39;s blog</title>
+    <title>ubuntu时间设置相关总结 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
         <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
     
     
     
-    <meta name="description" content="本文主要讲解oracle和mysql中substr实现上的一些区别。">
+    <meta name="description" content="ubuntu中时间的设置.包括CST到UTC的修改,系统时间与BIOS时间的同步设置,同步网络时间的设置等.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="oracle和mysql中substr的区别">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/index.html">
+<meta property="og:title" content="ubuntu时间设置相关总结">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="本文主要讲解oracle和mysql中substr实现上的一些区别。">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/9d15fcebgw1ermr34q7amj206q038q31.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/9d15fcebgw1ernbk4gzw7j206v039jrk.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/9d15fcebgw1ernbzey82ig20g10nv757.gif">
-<meta property="og:updated_time" content="2016-03-14T02:43:04.829Z">
+<meta property="og:description" content="ubuntu中时间的设置.包括CST到UTC的修改,系统时间与BIOS时间的同步设置,同步网络时间的设置等.">
+<meta property="og:updated_time" content="2016-03-17T14:40:57.690Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="oracle和mysql中substr的区别">
-<meta name="twitter:description" content="本文主要讲解oracle和mysql中substr实现上的一些区别。">
-<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/9d15fcebgw1ermr34q7amj206q038q31.jpg">
+<meta name="twitter:title" content="ubuntu时间设置相关总结">
+<meta name="twitter:description" content="ubuntu中时间的设置.包括CST到UTC的修改,系统时间与BIOS时间的同步设置,同步网络时间的设置等.">
     
     
         
@@ -35,8 +31,8 @@
         <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
     
     
-        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-14/28146611.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-14/28146611.jpg" />
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg" />
     
     
     
@@ -219,19 +215,19 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            oracle和mysql中substr的区别
+            ubuntu时间设置相关总结
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Wed Feb 04 2015 00:46:21 GMT+0800">
+    <time itemprop="datePublished" content="Wed Jan 14 2015 19:19:45 GMT+0800">
 	
-		    Feb 04, 2015
+		    Jan 14, 2015
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/原创/">原创</a>
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/Linux命令系列/">Linux命令系列</a>
 
 
     
@@ -240,27 +236,29 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>本文主要讲解oracle和mysql中substr实现上的一些区别。<br><a id="more"></a><br>1.&emsp;mysql中支持substring和substr，并且两者的功能完全一样。oracle中只支持substr。<br>2.&emsp;mysql中支持的格式如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SUBSTRING(str,pos)</span><br><span class="line">SUBSTRING(str FROM pos) </span><br><span class="line">SUBSTRING(str,pos,len)</span><br><span class="line">SUBSTRING(str FROMpos FOR len)</span><br><span class="line">SUBSTR(str,pos)</span><br><span class="line">SUBSTR(str FROM pos) </span><br><span class="line">SUBSTR(str,pos,len) </span><br><span class="line">SUBSTR(str FROM pos FOR len)</span><br></pre></td></tr></table></figure></p>
-<p>oracle中支持的格式如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUBSTR( <span class="built_in">string</span>, start_position, [ length ] )</span><br></pre></td></tr></table></figure></p>
-<p>3.&emsp;对于mysql，如果pos为0，则返回为空，如果pos为1，则从第一个字符开始，如下图：<br><img src="http://ww4.sinaimg.cn/large/9d15fcebgw1ermr34q7amj206q038q31.jpg" alt="mysql_substr_0"> &emsp; <img src="http://ww1.sinaimg.cn/large/9d15fcebgw1ernbk4gzw7j206v039jrk.jpg" alt="mysql_substr_1"><br>4.&emsp;对于oracle，start_position为0时当做1来处理，也就是start_position为0或者为1的结果相同。<br>5.&emsp;如果length小于1，mysql和oracle都会返回空。<br>6.&emsp;oracle官方note:</p>
-<blockquote>
-<ul>
-<li>If position is 0, then it is treated as 1.</li>
-<li>If position is positive, then Oracle Database counts from the beginning of char to find the first character.</li>
-<li>If position is negative, then Oracle counts backward from the end of char.</li>
-<li>If substring_length is omitted, then Oracle returns all characters to the end of char. If substring_length is less than 1, then Oracle returns null.</li>
+            <p>ubuntu中时间的设置.包括CST到UTC的修改,系统时间与BIOS时间的同步设置,同步网络时间的设置等.<br><a id="more"></a></p>
+<h3 id="1-ensp-名词解释："><a href="#1-ensp-名词解释：" class="headerlink" title="1.&ensp;名词解释："></a>1.&ensp;名词解释：</h3><ul>
+<li><code>GMT</code>：格林威治标准时间(Greenwich Mean Time，简称G.M.T.)；</li>
+<li><code>UTC</code>：世界协调时间(Universal Time Coordinated,UTC)</li>
+<li><code>CST</code> ：中国沿海时间(北京时间)（China Standard Time UTC+8:00）</li>
 </ul>
-</blockquote>
-<p>7.&emsp;mysql举例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT SUBSTRING(&apos;Quadratically&apos;,5);</span><br><span class="line"> -&gt; &apos;ratically&apos;</span><br><span class="line">mysql&gt; SELECT SUBSTRING(&apos;foobarbar&apos; FROM 4);</span><br><span class="line">-&gt; &apos;barbar&apos;</span><br><span class="line">mysql&gt; SELECT SUBSTRING(&apos;Quadratically&apos;,5,6);</span><br><span class="line"> -&gt; &apos;ratica&apos;</span><br><span class="line">mysql&gt; SELECT SUBSTRING(&apos;Sakila&apos;, -3);</span><br><span class="line"> -&gt; &apos;ila&apos;</span><br><span class="line">mysql&gt; SELECT SUBSTRING(&apos;Sakila&apos;, -5, 3);</span><br><span class="line"> -&gt; &apos;aki&apos;</span><br><span class="line">mysql&gt; SELECT SUBSTRING(&apos;Sakila&apos; FROM -4 FOR 2);</span><br><span class="line">-&gt; &apos;ki&apos;</span><br></pre></td></tr></table></figure></p>
-<p>8.&emsp;oracle举例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SELECT SUBSTR(&apos;ABCDEFG&apos;,3,4) &quot;Substring&quot;</span><br><span class="line">     FROM DUAL;</span><br><span class="line">Substring</span><br><span class="line">---------</span><br><span class="line">CDEF</span><br><span class="line"></span><br><span class="line">SELECT SUBSTR(&apos;ABCDEFG&apos;,-5,4) &quot;Substring&quot;</span><br><span class="line">     FROM DUAL;</span><br><span class="line">Substring</span><br><span class="line">---------</span><br><span class="line">CDEF</span><br></pre></td></tr></table></figure></p>
-<p>9.&emsp;官方解释：</p>
+<h3 id="2-ensp-修改CST到UTC"><a href="#2-ensp-修改CST到UTC" class="headerlink" title="2.&ensp;修改CST到UTC"></a>2.&ensp;修改CST到UTC</h3><p>在linux中查看时间执行<code>date</code>命令，如果使用的是<code>CST</code>格式，则会比正常时间晚8个小时，需要修改成<code>UTC</code>格式。修改方式如下:</p>
+<ol>
+<li>&ensp;<code>sudo dpkg-reconfigure tzdata</code> ;</li>
+<li>&ensp;在弹出的界面中选择”etc” ;</li>
+<li>&ensp;在下一个页面选择“utc”,之后回车 。</li>
+</ol>
+<p>以上命令实际上修改的是/etc/timezone 和 /etc/localtime。</p>
+<h3 id="3-系统时间和BIOS时间"><a href="#3-系统时间和BIOS时间" class="headerlink" title="3.系统时间和BIOS时间"></a>3.系统时间和BIOS时间</h3><p>linux中存在两个时间，系统时间和BIOS时间。当系统启动时会读取BIOS时间，系统关闭时会把当前时间写回BIOS。</p>
 <ul>
-<li>Mysql官方对substr的解释: <a href="http://dev.mysql.com/doc/refman/5.0/en/string-functions.html#function_substring" target="_blank" rel="external">链接</a></li>
-<li>Oracle官方对substr的解释: <a href="http://docs.oracle.com/cd/B19306_01/server.102/b14200/functions162.htm" target="_blank" rel="external">链接</a></li>
+<li>查看系统时间：<code>dat</code> </li>
+<li>查看BIOS时间：<code>sudo hwclock –show</code></li>
+<li>系统时间设置： <code>sudo date MMDDhhmmCCYY.ss</code>（月、日、小时、分钟、年、秒）</li>
+<li>同步BIOS时间：<code>sudo hwclock –systohc</code> 或者 <code>sudo hwclock –systohc –utc</code></li>
 </ul>
-<p>10.&emsp;最后,一张图搞懂mysql中<code>substring</code>.(来源:<a href="http://www.w3resource.com/" target="_blank" rel="external">w3resource</a>)<br><img src="http://ww1.sinaimg.cn/large/9d15fcebgw1ernbzey82ig20g10nv757.gif" alt=""></p>
+<h3 id="4-同步网络时间"><a href="#4-同步网络时间" class="headerlink" title="4.同步网络时间"></a>4.同步网络时间</h3><p><code>sudo ntpdate cn.pool.ntp.org</code><br>tips：需要先安装ntpdate（sudo atp-get install ntpdate）</p>
 <hr>
-<p>(完)</p>
+<p>(EOF)</p>
 
             
         </div>
@@ -270,7 +268,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/mysql/">mysql</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/oracle/">oracle</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/substr/">substr</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/数据库/">数据库</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/ubuntu/">ubuntu</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/ubuntu时间设置/">ubuntu时间设置</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/同步网络时间/">同步网络时间</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/系统设置/">系统设置</a>
 
             </div>
         
@@ -279,7 +277,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/04/substr-in-oracle-and-mysql/"  data-tooltip="oracle和mysql中substr的区别">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -287,7 +285,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/01/14/set-time-in-ubuntu/" data-tooltip="ubuntu时间设置相关总结">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/24/delete-M-in-linux/" data-tooltip="Linux下删除文件行尾的^M">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -302,17 +300,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -350,7 +348,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/04/substr-in-oracle-and-mysql/"  data-tooltip="oracle和mysql中substr的区别">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -358,7 +356,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/01/14/set-time-in-ubuntu/" data-tooltip="ubuntu时间设置相关总结">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/24/delete-M-in-linux/" data-tooltip="Linux下删除文件行尾的^M">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -373,17 +371,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -403,17 +401,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/02/04/substr-in-oracle-and-mysql/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/01/14/set-time-in-ubuntu/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
