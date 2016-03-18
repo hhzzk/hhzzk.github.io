@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="hhzzk&#39;s blog">
+    <title>读&lt;&lt;人月神话&gt;&gt;的一些感想 - hhzzk&#39;s blog</title>
+    <meta name="author" content="hhzzk">
+    
+        <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
+    
+    
+    
+    <meta name="description" content="读《人月神话》的一些感想，程序员为什么要经常加班？搞开发是否是青春饭？">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="读<<人月神话>>的一些感想">
+<meta property="og:url" content="http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/index.html">
+<meta property="og:site_name" content="hhzzk's blog">
+<meta property="og:description" content="读《人月神话》的一些感想，程序员为什么要经常加班？搞开发是否是青春饭？">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/9d15fcebjw1erokro2sl8j20g20e8gm6.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/9d15fcebjw1eroks3p520j20fv0eomxq.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/9d15fcebjw1eroksecrh1j20ul09740w.jpg">
+<meta property="og:updated_time" content="2016-03-18T14:31:59.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读<<人月神话>>的一些感想">
+<meta name="twitter:description" content="读《人月神话》的一些感想，程序员为什么要经常加班？搞开发是否是青春饭？">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/9d15fcebjw1erokro2sl8j20g20e8gm6.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
+    
+    
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-18/2467704.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-18/2467704.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-quwccsthbllipo6252snb2tfkddvrsp1eczkytpz3vmxpsb6nwodixemlkux.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-75043309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?524967b36e424c809d8331e61e39d820";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">hhzzk&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">hhzzk</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            读&lt;&lt;人月神话&gt;&gt;的一些感想
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sun Nov 16 2014 20:54:54 GMT+0800">
+	
+		    Nov 16, 2014
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/随笔/">随笔</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <!-- excerpt --></p>
+<h4 id="1-为什么会加班"><a href="#1-为什么会加班" class="headerlink" title="1.为什么会加班"></a>1.为什么会加班</h4><p>&emsp;&emsp;在软件项目中，项目滞后是很普遍的事情，解决的办法通常是增加人手，但在书中作者指出了这种做法的错误。像割小麦或者收棉花这种传统行业可以很轻松的将某个任务分解给参与人员，并且这些参与人员不需要有过多的交流，而且这些被分解的任务也基本不存在时间上的依赖关系，而在软件开发中近乎不可能。 软件开发中很多的任务都存在次序上的限制而不能分解，增加人手对进度是没有帮助的。对于可以分解的任务，不同的子任务之间需要相互沟通和交流，增加的人手越多，沟通的成本越高，往往得不到加快进度的目的。而且这些都没有包括对新增加人员培训的时间成本等，所以作者得出结论:向进度落后的项目中增加人手，只会使进度更加落后。而对于国内的软件公司通常的做法就是加班，增加人月的工作量，所以在国内加班基本上是普遍现象，而且几乎成了这个行业的代名词。但是这种做法是否真正有效，我持保留意见。</p>
+<p>&emsp;&emsp;对于项目滞后，作者指出缺乏合理的进度安排是造成这一问题的最主要原因，而且他比其他所有因素加起来的影响还要大。对于软件任务的进度安排，作者在书中给出了他使用很多年的经验法则：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">时间进度</th>
+<th style="text-align:left">任务安排</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1/3</td>
+<td style="text-align:left">计划</td>
+</tr>
+<tr>
+<td style="text-align:center">1/6</td>
+<td style="text-align:left">编码</td>
+</tr>
+<tr>
+<td style="text-align:center">1/4</td>
+<td style="text-align:left">构件测试和早期系统测试</td>
+</tr>
+<tr>
+<td style="text-align:center">1/4</td>
+<td style="text-align:left">系统测试、所有的构件已完成</td>
+</tr>
+</tbody>
+</table>
+<p>&emsp;&emsp;从图表中可以看到计划占了整个项目三分之一的时间。项目的时间依赖于顺序上的限制，人员的最大数量依赖于独立子任务的数量。合理的进度安排，合理的人员配置是保证项目按时完成的关键所在，也是解决加班问题的主要办法。</p>
+<h4 id="2-青春饭论"><a href="#2-青春饭论" class="headerlink" title="2.青春饭论"></a>2.青春饭论</h4><p>&emsp;&emsp;程序员只能吃青春饭，这样的结论一直在流传，大概的依据就是需要加班，需要熬夜，年纪一大身体就不行了；这个行业技术更新太快，年纪一大学习能力就差了。所以普遍的认为是程序员到达一定的年龄就不能codeing了，或者转管理，或者转技术支持，或者被淘汰。真的这样吗？在外科手术队伍一章中作者提到优秀的程序员比一般的程序员在生产率上有10:1的差距，而在编程速度和空间上 具有5：1的差异，简单说就是在生产率上20000美刀/年的程序员可能是10000美刀/年的程序员的10倍。也就是说优秀程序员的效率比普通程序员有数量级以上的差异，而对于产出效益比就更不知道高出多少个数量级。而且优秀的程序员其产出造成的bug少，商业损失和事故少，代码优良所以可扩展成本低、维护低等等。所以作者讲到：在可能的情况下，尽量使用优秀的程序员。那么问题来了，优秀程序员和年龄、经验到底有没有关系？实际上没有人可以保证这一点，但下面的一 篇论文却可以得出一些结论。<br>&emsp;&emsp;论文链接： <a href="http://people.engr.ncsu.edu/ermurph3/papers/msr13.pdf" target="_blank" rel="external">Is Programming Knowledge Related to Age?</a></p>
+<p>&emsp;&emsp;这篇论文是两个北卡罗莱纳州立大学计算机科学系的两个人 <code>Patrick Morrison</code>  和 <code>Emerson Murphy-Hill</code> 对StackOverflow.com上的用户做了相关的数据挖掘得出来的一些数据。（我们知道StackOverflow.com上的数据是公开的，任何人都可以用来分析和统计，所以这篇论文的真实性是有的）</p>
+<p>数据采样和清洗条件如下：（数据全量是1694981用户，平均年龄30.3岁）</p>
+<ul>
+<li>15-70岁之间的用户（这年龄段的用户被称做“Working age”），当然，有很多用户没有输入年龄，这些用户都被过滤了。</li>
+<li>用户在2012年内都回答过问题。因为StackOverflow在2012年对问题和答案的质量要求得比以前高了一倍，所以更能反映程序员的真实水平。</li>
+<li>Reputation声望在2-100K之间。（注：StackOverflow的用户Reputation是得到社会认可的，在面试和招聘中是硬通货币。比大学的学分更有价值）</li>
+</ul>
+<p>上述的条件一共过滤出84,248名程序员，平均年龄：29.02岁，平均Reputaion在1073.9分。</p>
+<h5 id="年龄分布图"><a href="#年龄分布图" class="headerlink" title="年龄分布图"></a>年龄分布图</h5><p>&emsp;&emsp;下面我们来看一下他们的年龄分布图：我们可以看到程序员年纪的正态分布（高点在25岁左右，但是中点在29岁左右）</p>
+<p><img src="http://ww4.sinaimg.cn/large/9d15fcebjw1erokro2sl8j20g20e8gm6.jpg" alt="age"></p>
+<h5 id="能力和年龄分布图"><a href="#能力和年龄分布图" class="headerlink" title="能力和年龄分布图"></a>能力和年龄分布图</h5><p>&emsp;&emsp;然后，计算每个人每个月的Reputation，这样可以找到这个用户的真正的活跃时间，这样便于计算这个程序员的真实能力。（总声望 / 活跃时间），可以得到他平均每个月得来的Reputation。</p>
+<p>我们来看看程序员的能力和年龄段的分布图：（你可能会大吃一惊）</p>
+<p><img src="http://ww2.sinaimg.cn/large/9d15fcebjw1eroks3p520j20fv0eomxq.jpg" alt="bility_age"></p>
+<p>&emsp;&emsp;上图中我们可以看到，程序员的能力在从25岁左右开始上升，一直到50岁后才会开始下降。所以说，程序员吃的不是青春饭。只有码农，靠蛮力，用体力而不是用脑力的程序员才是吃青春饭的人。</p>
+<h5 id="年纪大的人是否跟不上新技术"><a href="#年纪大的人是否跟不上新技术" class="headerlink" title="年纪大的人是否跟不上新技术"></a>年纪大的人是否跟不上新技术</h5><p>&emsp;&emsp;论文的作者分析了Tag，用了最近5年内比较流行的技术Tag，然后用了一套比较严谨的算法来查看那些所谓的“老程序员”是否在新技术上跟上不了，所谓跟不上，也就是这些老的程序员在回答这些新技术上并不活跃。所谓老，就是37岁以上的程序员（就是我现在的年纪）。</p>
+<p>&emsp;&emsp;得到了下表：可以看到，老程序员和年轻的程序员对于一些新技术的学习来说也是差不多的，甚至有些项还超过了年轻的程序员。</p>
+<p><img src="http://ww2.sinaimg.cn/large/9d15fcebjw1eroksecrh1j20ul09740w.jpg" alt="old_new"></p>
+<h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><ol>
+<li><p>程序员技术能力上升是可以到50岁或60岁的。</p>
+</li>
+<li><p>老程序员在获取新技术上的能力并不比年轻的程序员差。</p>
+</li>
+</ol>
+<p>&emsp;&emsp;由此我们完全有理由相信程序员的工作不是吃青春饭的，恰恰相反随着年龄的增长，能力、经验也都会增长。当然这也不是绝对的，你必须热爱这一行业，并且愿意付出时间，愿意继续钻研。<br>&emsp;&emsp;随着移动互联网的到来，以及这一行业的持续火热，程序员的需求也越来越旺盛，所以我们看到越来越多的人跨入这个行业，有人半路出家，有人只是看到了钱景。但当真正入行之后，很多人不是努力继续学习，追求技术的进步，往往开始懈怠，希望可以一劳永逸。所以有人开始抱怨开发太累，实在学不动，开发只是年轻人的事情。我想这些都只是那些不愿意正视自己懒惰、软弱的借口而已。<br>&emsp;&emsp;反观在IT业发展很久的国外，50、60岁以上的比比皆是。所以如果你保持对coding的热爱，对技术提高的执着，我相信一定可以一直写下去。</p>
+<p>注：以上论文的分析借用了<a href="http://coolshell.cn/articles/10688.html" target="_blank" rel="external">酷壳</a>的分析</p>
+<hr>
+<p>(EOF)</p>
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/人月神话/">人月神话</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/程序人生/">程序人生</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/11/27/install_java_on_ubuntu/"  data-tooltip="如何在Ubuntu上安装Oracle Java 8">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/11/06/encrypt_file_use_openssl/" data-tooltip="利用python加密的文件在openssl解密时遇到的问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 hhzzk. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/11/27/install_java_on_ubuntu/"  data-tooltip="如何在Ubuntu上安装Oracle Java 8">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/11/06/encrypt_file_use_openssl/" data-tooltip="利用python加密的文件在openssl解密时遇到的问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2014/11/16/reading_thoughts_of_man_month/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+        
+            <h4 id="about-card-name">hhzzk</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Shanghai
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-rjanlllosg30d03qrddpwrs6wqf4k3v0bbo68hiifuvthyhqfefx2htcagu0.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
