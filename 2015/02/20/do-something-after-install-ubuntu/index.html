@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="hhzzk&#39;s blog">
+    <title>安装ubuntu后需要做的一些事 - hhzzk&#39;s blog</title>
+    <meta name="author" content="hhzzk">
+    
+        <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
+    
+    
+    
+    <meta name="description" content="之前一直把Ubuntu装在虚拟机上，但是卡的要死，所以刚刚装了双系统，刚刚装的ubuntu难免有一些东西要捯饬一下。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="安装ubuntu后需要做的一些事">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/index.html">
+<meta property="og:site_name" content="hhzzk's blog">
+<meta property="og:description" content="之前一直把Ubuntu装在虚拟机上，但是卡的要死，所以刚刚装了双系统，刚刚装的ubuntu难免有一些东西要捯饬一下。">
+<meta property="og:updated_time" content="2016-03-18T15:10:46.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装ubuntu后需要做的一些事">
+<meta name="twitter:description" content="之前一直把Ubuntu装在虚拟机上，但是卡的要死，所以刚刚装了双系统，刚刚装的ubuntu难免有一些东西要捯饬一下。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
+    
+    
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-18/55460490.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-18/55460490.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-quwccsthbllipo6252snb2tfkddvrsp1eczkytpz3vmxpsb6nwodixemlkux.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-75043309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?524967b36e424c809d8331e61e39d820";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">hhzzk&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">hhzzk</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            安装ubuntu后需要做的一些事
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Fri Feb 20 2015 15:50:57 GMT+0800">
+	
+		    Feb 20, 2015
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/Linux命令系列/">Linux命令系列</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>之前一直把Ubuntu装在虚拟机上，但是卡的要死，所以刚刚装了双系统，刚刚装的ubuntu难免有一些东西要捯饬一下。<br><a id="more"></a></p>
+<h4 id="把中文环境换成英文环境"><a href="#把中文环境换成英文环境" class="headerlink" title="把中文环境换成英文环境"></a>把中文环境换成英文环境</h4><p>可能是安装的时候选成了中文，导致系统环境都是中文的，用着很不爽。<br>修改办法： </p>
+<h5 id="第一步-安装en-US-utf8"><a href="#第一步-安装en-US-utf8" class="headerlink" title="第一步,安装en_US.utf8"></a>第一步,安装en_US.utf8</h5><p>终端下运行 <code>locale -a</code> 查看有没有安装 <code>en_US.utf8</code> ， 如果没有，可以使用命令 <code>sudo locale-gen en_US.UTF-8</code> 进行安装 </p>
+<h5 id="第二步-修改locale文件"><a href="#第二步-修改locale文件" class="headerlink" title="第二步,修改locale文件"></a>第二步,修改locale文件</h5><p>在特权模式下运行下面的命令将locale打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/default/locale</span><br></pre></td></tr></table></figure></p>
+<p>可以看到如下的内容： </p>
+<blockquote>
+<p>LANG=”zh_US.UTF-8”<br>LANGUAGE=”zh_US:zh” </p>
+</blockquote>
+<p>我们只要将 <code>zh_US.UTF-8</code> 改为 <code>en_US.UTF-8</code> ，zh改为en即可，如下： </p>
+<blockquote>
+<p>LANG=”en_US.UTF-8”<br>LANGUAGE=”en_US:en” </p>
+</blockquote>
+<p>修改完之后，保存退出。<br>重启电脑或者执行下面的命令使配置生效： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/default/locale</span><br></pre></td></tr></table></figure>
+<p>注意：系统环境由中文改为英文之后，当重启系统之后，系统会弹出对话框，询问是否将home目录下默认的文件夹（下载、桌面、模板等等）改为英文。如果选择修改那么你必须再次重启电脑，否则桌面等是无法使用了。例如，我改成英文之后想在桌面创建一个临时文件，但系统提示我找不到“桌面”。 </p>
+<h4 id="安装chrome"><a href="#安装chrome" class="headerlink" title="安装chrome"></a>安装chrome</h4><p>之前一直用chrome，所有的书签也都保存在google账号中，并且也要用它翻墙，所以需要安装chrome。 </p>
+<h5 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1. 下载安装包"></a>1. 下载安装包</h5><p>执行下面的命令，不需要翻墙就能下载 </p>
+<ul>
+<li><p>a. 32位稳定版</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>b. 32位Unstable版</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.google.com/linux/direct/google-chrome-unstable_current_i386.deb)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>c. 64位稳定版： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>d. 64位Unstable版： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.google.com/linux/direct/google-chrome-unstable_current_amd64.deb</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>选择32位还是64位就要看你的系统了。至于稳定版还是Unstable版，网上是这样讲的“如果你追求稳定的话，最好选择稳定版，如果你喜欢尝试新功能并追求最好的性能，推荐安装Unstable版，而且似乎在Ubuntu下，Unstable版的Chrome中的字体显示也要比Beta好看一些”。因为之前一直使用稳定版，这次想要尝试一下Unstable版，所以安装了64位的Unstable版，确实如别人讲的那样，字体好看了并且感觉更快了些。 </p>
+<h5 id="2-更新升级："><a href="#2-更新升级：" class="headerlink" title="2. 更新升级："></a>2. 更新升级：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<h5 id="3-安装："><a href="#3-安装：" class="headerlink" title="3. 安装："></a>3. 安装：</h5><p>进入到安装包的目录，执行下面的命令：<br>sudo dpkg -i google-chrome-unstable_current_amd64.deb<br>这一步有可能会失败，那是因为缺少响应的依赖包，需要执行下面的命令安装：<br>sudo apt-get install -f<br>安装好依赖包之后再次执行安装命令。<br>至此chrome就安装好了，你可以在系统中搜索到chrome，然后点击打开并且将其固定到launcher上。 </p>
+<h4 id="安装搜狗输入法"><a href="#安装搜狗输入法" class="headerlink" title="安装搜狗输入法"></a>安装搜狗输入法</h4><p>中文输入法是必须的，相对来说搜狗做的应该是比较好的。<br>安装过程参考<a href="http://jingyan.baidu.com/article/ad310e80ae6d971849f49ed3.html" target="_blank" rel="external">这里</a><br>总结如下： </p>
+<ul>
+<li>a）官网下载安装包，点击安装 </li>
+<li>b）终端下输入 <code>im-config</code> –&gt; <code>点击OK</code> –&gt; <code>点击yes</code> –&gt; <code>选择fcitx,点击OK</code> –&gt; <code>点击OK</code> –&gt; <code>重启电脑</code> </li>
+<li>c）终端下输入 <code>fcitx-config-gtk</code> –&gt; 点击对话框左下角的（+）按钮 –&gt; 取消<code>Only Show Current Language</code> –&gt; 在输入框中输入sogou，选中点击OK </li>
+</ul>
+<p><em>tips：在最下方的是默认输入法。</em></p>
+<h4 id="改变ubuntu主题"><a href="#改变ubuntu主题" class="headerlink" title="改变ubuntu主题"></a>改变ubuntu主题</h4><p>对Ubuntu默认的主题实在无爱,还是比较喜欢numix,安装过程参见<a href="http://itsfoss.com/how-to-install-themes-in-ubuntu-13-10/" target="_blank" rel="external">这里</a><br>安装过程总结一下就是下面几条命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install unity-tweak-tool</span><br><span class="line">sudo add-apt-repository ppa:numix/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install numix-icon-theme-shine numix-icon-theme-circle</span><br></pre></td></tr></table></figure></p>
+<p>然后打开 <code>unity-tweek-tool</code>, 选择 <code>Theme</code>, 选择 <code>numix</code> 即可.</p>
+<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><p>一直纠结于Vim的配色问题,直到找到<a href="https://github.com/spf13/spf13-vim" target="_blank" rel="external">spf13-vim</a>.<br>终端配色: 文字颜色设为#708284，背景颜色设为#07242E<br>终端字体: courier 10 pitch 12 </p>
+<h4 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h4><p>nodejs依赖python and g++, 必须提前安装好. nodejs有两种安装方式,第二种的安装方式不容易成功,会出现很多奇怪的问题(主要还是权限的问题),例如<a href="http://stackoverflow.com/questions/16151018/npm-throws-error-without-sudo" target="_blank" rel="external">这里</a>讨论的情况我就遇到过,最好利用第一种的nvm进行安装. </p>
+<h5 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h5><p>a. 安装nvm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后,重启终端 </p>
+<p>b. 查看nodejs版本信息,选择想要安装的版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm ls-remote</span><br></pre></td></tr></table></figure></p>
+<p>c. 安装nodejs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install 0.12.2</span><br></pre></td></tr></table></figure></p>
+<h5 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h5><p>添加源之后使用apt-get安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:chris-lea/node.js </span><br><span class="line">sudo apt-get update </span><br><span class="line">sudo apt-get install nodejs </span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure></p>
+<p>查看版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v </span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure></p>
+<p>此种安装方法有可能不是最新的版本所以需要升级:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo npm cache clean -f</span><br><span class="line">sudo npm update –g</span><br><span class="line">sudo npm install -g n </span><br><span class="line">sudo n latest</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>(EOF)</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/ubuntu/">ubuntu</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/04/substr-in-oracle-and-mysql/" data-tooltip="oracle和mysql中substr的区别">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 hhzzk. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/04/substr-in-oracle-and-mysql/" data-tooltip="oracle和mysql中substr的区别">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/02/20/do-something-after-install-ubuntu/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+        
+            <h4 id="about-card-name">hhzzk</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Shanghai
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-rjanlllosg30d03qrddpwrs6wqf4k3v0bbo68hiifuvthyhqfefx2htcagu0.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
