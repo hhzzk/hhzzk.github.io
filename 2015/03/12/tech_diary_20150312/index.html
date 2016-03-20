@@ -6,23 +6,23 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>递归实现全排列 - hhzzk&#39;s blog</title>
+    <title>技术日志:linux防火墙,oracle安装 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
         <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
     
     
     
-    <meta name="description" content="全排列的讲解及代码实现">
+    <meta name="description" content="Linux防火墙相关命令，在redhat上安装oracle。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="递归实现全排列">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/04/01/full_permutation /index.html">
+<meta property="og:title" content="技术日志:linux防火墙,oracle安装">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="全排列的讲解及代码实现">
-<meta property="og:updated_time" content="2016-03-15T14:32:05.525Z">
+<meta property="og:description" content="Linux防火墙相关命令，在redhat上安装oracle。">
+<meta property="og:updated_time" content="2016-03-20T08:03:23.301Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="递归实现全排列">
-<meta name="twitter:description" content="全排列的讲解及代码实现">
+<meta name="twitter:title" content="技术日志:linux防火墙,oracle安装">
+<meta name="twitter:description" content="Linux防火墙相关命令，在redhat上安装oracle。">
     
     
         
@@ -31,8 +31,8 @@
         <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
     
     
-        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-15/25444741.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-15/25444741.jpg" />
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-20/76370097.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-20/76370097.jpg" />
     
     
     
@@ -215,19 +215,19 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            递归实现全排列
+            技术日志:linux防火墙,oracle安装
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Wed Apr 01 2015 10:15:20 GMT+0800">
+    <time itemprop="datePublished" content="Thu Mar 12 2015 15:50:57 GMT+0800">
 	
-		    Apr 01, 2015
+		    Mar 12, 2015
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/算法系列/">算法系列</a>
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/技术日志/">技术日志</a>
 
 
     
@@ -237,14 +237,9 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <!-- excerpt --></p>
-<p><strong>全排列的含义</strong><br>拿 <code>123</code> 举例，<code>123</code> 的全排列一共 <code>3！</code> , 即6种，分别是：</p>
-<ul>
-<li><code>123</code> &emsp; <code>132</code> &emsp; <em>规律是1开头，然后是2和3的全排列</em></li>
-<li><code>213</code> &emsp; <code>231</code> &emsp; <em>规律是2开头，然后是1和3的全排列</em></li>
-<li><code>312</code> &emsp; <code>321</code> &emsp; <em>规律是3开头，然后是1和2的全排列</em></li>
-</ul>
-<p>由上不难发现，全排列其实就是每个元素分别开头，然后其余的元素全排列。很显然这是一个递归的规律。</p>
-<p><strong>代码</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span>   </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">char</span> *a ,<span class="keyword">char</span> *b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    m = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">perm</span><span class="params">(<span class="keyword">char</span> <span class="built_in">list</span>[],<span class="keyword">int</span> k, <span class="keyword">int</span> m )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(k == m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt;= m ; i++)  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">" "</span>&lt;&lt;<span class="built_in">list</span>[i];  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;  </span><br><span class="line">        n++;  </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i = k ; i &lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(&amp;<span class="built_in">list</span>[k],&amp;<span class="built_in">list</span>[i]);  </span><br><span class="line">        perm(<span class="built_in">list</span>,k+<span class="number">1</span>,m);  </span><br><span class="line">        swap(&amp;<span class="built_in">list</span>[k],&amp;<span class="built_in">list</span>[i]);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> <span class="built_in">list</span>[] =<span class="string">"12345"</span>;</span><br><span class="line">    perm(<span class="built_in">list</span>,<span class="number">0</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"total:"</span>&lt;&lt;n&lt;&lt;<span class="string">"/n"</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-linux防火墙方面的命令"><a href="#1-linux防火墙方面的命令" class="headerlink" title="1.linux防火墙方面的命令"></a>1.linux防火墙方面的命令</h4><p>机器重启后所做配置会失效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">service iptables start </span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure></p>
+<p>机器重启后所做配置不会失效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig iptables on</span><br><span class="line">chkconfig iptables off</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-在redhat上安装oracle-11-2-相关："><a href="#2-在redhat上安装oracle-11-2-相关：" class="headerlink" title="2. 在redhat上安装oracle 11.2 相关："></a>2. 在redhat上安装oracle 11.2 相关：</h4><p>参考教程： <a href="http://www.cnblogs.com/zhangyongli2011/archive/2012/04/04/2431953.html" target="_blank" rel="external">链接</a><br>必须要安装全部的rpm包，虽然系统是64位的，oracle的版本也是64位的，但是有些包 32位和64位的 必须都要安装。<br>下面几条命令用来查看、启动、停止监听服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status</span><br><span class="line">lsnrctl start</span><br><span class="line">lsnrctl stop</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>(EOF)</p>
             
@@ -255,7 +250,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/全排列/">全排列</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/算法/">算法</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/面试题/">面试题</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/ubuntu/">ubuntu</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/防火墙/">防火墙</a>
 
             </div>
         
@@ -264,7 +259,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/random_permutation/"  data-tooltip="随机排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -272,7 +267,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/12/tech_diary_20150312/" data-tooltip="技术日志:linux防火墙,oracle安装">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/20/do-something-after-install-ubuntu/" data-tooltip="安装ubuntu后需要做的一些事">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -287,17 +282,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -335,7 +330,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/random_permutation/"  data-tooltip="随机排列">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -343,7 +338,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/12/tech_diary_20150312/" data-tooltip="技术日志:linux防火墙,oracle安装">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/20/do-something-after-install-ubuntu/" data-tooltip="安装ubuntu后需要做的一些事">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -358,17 +353,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -388,17 +383,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/01/full_permutation /">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
