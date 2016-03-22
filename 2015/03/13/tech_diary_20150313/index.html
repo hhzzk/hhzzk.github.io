@@ -6,23 +6,23 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>技术日志:linux防火墙,oracle安装 - hhzzk&#39;s blog</title>
+    <title>技术日志:多核 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
         <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
     
     
     
-    <meta name="description" content="Linux防火墙相关命令，在redhat上安装oracle。">
+    <meta name="description" content="一、多核并行计算：">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="技术日志:linux防火墙,oracle安装">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/index.html">
+<meta property="og:title" content="技术日志:多核">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="Linux防火墙相关命令，在redhat上安装oracle。">
-<meta property="og:updated_time" content="2016-03-20T08:03:23.301Z">
+<meta property="og:description" content="一、多核并行计算：">
+<meta property="og:updated_time" content="2016-03-22T13:05:55.173Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="技术日志:linux防火墙,oracle安装">
-<meta name="twitter:description" content="Linux防火墙相关命令，在redhat上安装oracle。">
+<meta name="twitter:title" content="技术日志:多核">
+<meta name="twitter:description" content="一、多核并行计算：">
     
     
         
@@ -215,13 +215,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            技术日志:linux防火墙,oracle安装
+            技术日志:多核
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Thu Mar 12 2015 15:50:57 GMT+0800">
+    <time itemprop="datePublished" content="Fri Mar 13 2015 17:30:57 GMT+0800">
 	
-		    Mar 12, 2015
+		    Mar 13, 2015
     	
     </time>
     
@@ -236,12 +236,19 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt --></p>
-<h4 id="1-linux防火墙方面的命令"><a href="#1-linux防火墙方面的命令" class="headerlink" title="1.linux防火墙方面的命令"></a>1.linux防火墙方面的命令</h4><p>机器重启后所做配置会失效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop</span><br><span class="line">service iptables start </span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure></p>
-<p>机器重启后所做配置不会失效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig iptables on</span><br><span class="line">chkconfig iptables off</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-在redhat上安装oracle-11-2-相关："><a href="#2-在redhat上安装oracle-11-2-相关：" class="headerlink" title="2. 在redhat上安装oracle 11.2 相关："></a>2. 在redhat上安装oracle 11.2 相关：</h4><p>参考教程： <a href="http://www.cnblogs.com/zhangyongli2011/archive/2012/04/04/2431953.html" target="_blank" rel="external">链接</a><br>必须要安装全部的rpm包，虽然系统是64位的，oracle的版本也是64位的，但是有些包 32位和64位的 必须都要安装。<br>下面几条命令用来查看、启动、停止监听服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status</span><br><span class="line">lsnrctl start</span><br><span class="line">lsnrctl stop</span><br></pre></td></tr></table></figure></p>
+            <h4 id="一、多核并行计算："><a href="#一、多核并行计算：" class="headerlink" title="一、多核并行计算："></a>一、多核并行计算：</h4><a id="more"></a>
+<ol>
+<li>每一个进程都有自己的调用栈（call stack）（用来存储自己的局部变量）、有自己的程序计数器、自己的静态区、堆上new的对象。而每一个线程都有自己的调用栈和程序计数器，并且只能自己访问，但线程直接可以共享静态区和堆上的对象。</li>
+<li>进程间通信 （IPC，InterProcess Communication） 除了共享内存（shared memory）之外，还有 管道、消息队列、 信号 、套接口等。</li>
+</ol>
+<h4 id="二、java的常量定义用final"><a href="#二、java的常量定义用final" class="headerlink" title="二、java的常量定义用final"></a>二、java的常量定义用final</h4><p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PI = <span class="number">3.14</span>；</span><br></pre></td></tr></table></figure></p>
+<p>这样在别的类中也可以调用，但是要加上类名。</p>
+<h4 id="三、一个程序在不同的线程下花费时间的问题"><a href="#三、一个程序在不同的线程下花费时间的问题" class="headerlink" title="三、一个程序在不同的线程下花费时间的问题"></a>三、一个程序在不同的线程下花费时间的问题</h4><p>问题:</p>
+<pre><code>If you have 3 processors available and using 3 threads would take time X , then creating 4 threads would take time 1.5X
+</code></pre><p>总的花费时间为3x， 若划分为4个线程则每个线程执行的时间为3x/4,因为只有3个核，所以必须要执行2个线程的时间才行 所以(3x/4)*2 = 1.5x</p>
 <hr>
 <p>(EOF)</p>
+
             
         </div>
     </div>
@@ -250,7 +257,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/ubuntu/">ubuntu</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/防火墙/">防火墙</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/多核/">多核</a>
 
             </div>
         
@@ -259,7 +266,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/13/tech_diary_20150313/"  data-tooltip="技术日志:多核">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -267,7 +274,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/20/do-something-after-install-ubuntu/" data-tooltip="安装ubuntu后需要做的一些事">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/12/tech_diary_20150312/" data-tooltip="技术日志:linux防火墙,oracle安装">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -282,17 +289,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -330,7 +337,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/13/tech_diary_20150313/"  data-tooltip="技术日志:多核">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -338,7 +345,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/02/20/do-something-after-install-ubuntu/" data-tooltip="安装ubuntu后需要做的一些事">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/12/tech_diary_20150312/" data-tooltip="技术日志:linux防火墙,oracle安装">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -353,17 +360,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -383,17 +390,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/12/tech_diary_20150312/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/13/tech_diary_20150313/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
