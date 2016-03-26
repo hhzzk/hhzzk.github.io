@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>技术日志: c++中const修饰符作用总结 - hhzzk&#39;s blog</title>
+    <title>技术日志:大小端问题 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
         <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
@@ -15,16 +15,16 @@
         <link rel="icon" href="http://www.hhzzk.xyz/assets/images/favicon.ico">
     
     
-    <meta name="description" content="C++中 const 修饰符的使用相当灵活，所以使用起来也比较混乱，不能准确的把握其修饰的变量。">
+    <meta name="description" content="大小端模式的区别及其判断方法">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="技术日志: c++中const修饰符作用总结">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/index.html">
+<meta property="og:title" content="技术日志:大小端问题">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="C++中 const 修饰符的使用相当灵活，所以使用起来也比较混乱，不能准确的把握其修饰的变量。">
-<meta property="og:updated_time" content="2016-03-25T12:25:14.758Z">
+<meta property="og:description" content="大小端模式的区别及其判断方法">
+<meta property="og:updated_time" content="2016-03-26T15:06:41.368Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="技术日志: c++中const修饰符作用总结">
-<meta name="twitter:description" content="C++中 const 修饰符的使用相当灵活，所以使用起来也比较混乱，不能准确的把握其修饰的变量。">
+<meta name="twitter:title" content="技术日志:大小端问题">
+<meta name="twitter:description" content="大小端模式的区别及其判断方法">
     
     
         
@@ -217,13 +217,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            技术日志: c++中const修饰符作用总结
+            技术日志:大小端问题
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Sun Mar 15 2015 12:30:05 GMT+0800">
+    <time itemprop="datePublished" content="Mon Mar 16 2015 20:30:05 GMT+0800">
 	
-		    Mar 15, 2015
+		    Mar 16, 2015
     	
     </time>
     
@@ -238,28 +238,16 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>C++中 <code>const</code> 修饰符的使用相当灵活，所以使用起来也比较混乱，不能准确的把握其修饰的变量。<br><a id="more"></a></p>
-<h4 id="1-简单的用法："><a href="#1-简单的用法：" class="headerlink" title="1.简单的用法："></a>1.简单的用法：</h4><p><code>const</code> 最简单的用法就是声明一个常量，这个用法在c、c++中都适用。<br>例如下面的语句：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> constant1 = <span class="number">100</span>；</span><br></pre></td></tr></table></figure></p>
-<p>定义了一个常量 <code>constant1</code> ，这样在之后的程序中 <code>constant1</code> 的值就不能发生改变，只能是100，否则就会报错。</p>
-<p>在c/c++中 也可以用 <code>#define</code>  来定义一个常量，但两者有很多差别，例如， <code>#define</code> 定义一个宏，没有类型的区别，在预处理时进行替换，而 <code>const</code> 是有类型的常量，在程序运行时使用，并且会进行类型检查。<code>const</code> 比 <code>#define</code> 有更多的优点，所以推荐使用 <code>const</code> .</p>
-<h4 id="2-修饰指针"><a href="#2-修饰指针" class="headerlink" title="2.修饰指针"></a>2.修饰指针</h4><p><code>const</code> 同样可以修饰一个指针，这时就会产生歧义，到底 <code>const</code> 修饰的是指针本身还是指针指向的内容。<br>例如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *Constant2；</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * Constant2;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>declares that  Constant2  is a variable pointer to a constant integer</p>
-</blockquote>
-<p>上边两个<code>Const</code> 的作用是一样的, <code>const</code> 修饰的 <code>constant2</code> 是一个指针，它指向一个整形常量。也就是说 <code>const</code> 修饰的是指针指向的内容。</p>
-<p>下面这种声明方式则不同了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> Constant3;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>(declares that  Constant3  is constant pointer to a variable integer)</p>
-</blockquote>
-<p><code>const</code> 修饰的 <code>Constant3</code> 是一个常量指针，它指向一个整形变量。也就是说 <code>const</code> 修饰的是指针本身。</p>
-<p>如果想要既修饰指针本身又修饰指针所指的内容则如下面：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="keyword">const</span> * <span class="keyword">const</span> Constant4;</span><br></pre></td></tr></table></figure></p>
-<p>简单的区分方法是看const左边的关键字，如果左边没有则看右边的关键字，如果关键字是*则修饰的是指针本身，否则反之。</p>
-<blockquote>
-<p>（对应得在《effctive c++》中的解释，如果关键字const出现在*号的左边，表示被指物是常量；如果出现在*号的右边，表示指针自身是常量；如果出现在*号的两边，表示被指物和指针都是常量）</p>
-</blockquote>
+            <!-- excerpt --></p>
+<h4 id="大端模式"><a href="#大端模式" class="headerlink" title="大端模式"></a>大端模式</h4><p>所谓的大端模式，是指数据的高位，保存在内存的低地址中，而数据的低位，保存在内存的高地址中，<a id="more"></a>这样的存储模式有点儿类似于把数据当作字符串顺序处理：地址由小向大增加，而数据从高位往低位放；</p>
+<h4 id="小端模式"><a href="#小端模式" class="headerlink" title="小端模式"></a>小端模式</h4><p>所谓的小端模式，是指数据的高位保存在内存的高地址中，而数 据的低位保存在内存的低地址中，这种存储模式将地址的高低和数据位权有效地结合起来，高地址部分权值高，低地址部分权值低，和我们的逻辑方法一致。</p>
+<h4 id="大小端判断"><a href="#大小端判断" class="headerlink" title="大小端判断"></a>大小端判断</h4><p>大小端可以用union判断<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> &#123; </span><br><span class="line">    <span class="keyword">int</span> i; </span><br><span class="line">    <span class="keyword">char</span> c; </span><br><span class="line">&#125;test; </span><br><span class="line"></span><br><span class="line">test.i = <span class="number">1</span>; </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s\n"</span>, test.c == <span class="number">1</span> ? <span class="string">"little_endian"</span> : <span class="string">"big_endian"</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="一个题目"><a href="#一个题目" class="headerlink" title="一个题目"></a>一个题目</h4><p>在小端序的机器中,如果<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> X&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">char</span> y[<span class="number">4</span>]; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>那么:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X a; </span><br><span class="line">a.x=<span class="number">0x11223344</span>;<span class="comment">//16 进制 则:______</span></span><br></pre></td></tr></table></figure></p>
+<p>A   a.y[0]=11<br>B   a.y[1]=11<br>C   a.y[2]=11<br><strong>D   a.y[3]=11</strong><br>E   a.y[0]=22<br>F   a.y[3]=22</p>
+<p>本题实际的内存布局：<br>高   ————————–&gt;  低<br>|y[3]|y[2]    |y[1]|y[0]<br>|–|–|–|<br>|11|22|33|44</p>
 <hr>
 <p>(EOF)</p>
-
             
         </div>
     </div>
@@ -268,7 +256,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/C-C/">C/C++</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/const/">const</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/C-C/">C/C++</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/大小端问题/">大小端问题</a>
 
             </div>
         
@@ -277,7 +265,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/16/tech_diary_20150316/"  data-tooltip="技术日志:大小端问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -285,7 +273,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/13/tech_diary_20150313/" data-tooltip="技术日志: 多核">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/15/tech_diary_20150315/" data-tooltip="技术日志: c++中const修饰符作用总结">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -300,17 +288,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -348,7 +336,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/16/tech_diary_20150316/"  data-tooltip="技术日志:大小端问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -356,7 +344,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/13/tech_diary_20150313/" data-tooltip="技术日志: 多核">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/15/tech_diary_20150315/" data-tooltip="技术日志: c++中const修饰符作用总结">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -371,17 +359,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -401,17 +389,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/15/tech_diary_20150315/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
