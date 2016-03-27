@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>技术日志:大小端问题 - hhzzk&#39;s blog</title>
+    <title>技术日志:Linux命令 more head tail cat - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
         <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
@@ -15,16 +15,16 @@
         <link rel="icon" href="http://www.hhzzk.xyz/assets/images/favicon.ico">
     
     
-    <meta name="description" content="大小端模式的区别及其判断方法">
+    <meta name="description" content="Linux文件显示命令总结">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="技术日志:大小端问题">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/index.html">
+<meta property="og:title" content="技术日志:Linux命令 more head tail cat">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="大小端模式的区别及其判断方法">
-<meta property="og:updated_time" content="2016-03-26T15:06:41.368Z">
+<meta property="og:description" content="Linux文件显示命令总结">
+<meta property="og:updated_time" content="2016-03-27T02:12:34.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="技术日志:大小端问题">
-<meta name="twitter:description" content="大小端模式的区别及其判断方法">
+<meta name="twitter:title" content="技术日志:Linux命令 more head tail cat">
+<meta name="twitter:description" content="Linux文件显示命令总结">
     
     
         
@@ -217,13 +217,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            技术日志:大小端问题
+            技术日志:Linux命令 more head tail cat
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Mon Mar 16 2015 20:30:05 GMT+0800">
+    <time itemprop="datePublished" content="Wed Mar 18 2015 21:30:15 GMT+0800">
 	
-		    Mar 16, 2015
+		    Mar 18, 2015
     	
     </time>
     
@@ -239,13 +239,27 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <!-- excerpt --></p>
-<h4 id="大端模式"><a href="#大端模式" class="headerlink" title="大端模式"></a>大端模式</h4><p>所谓的大端模式，是指数据的高位，保存在内存的低地址中，而数据的低位，保存在内存的高地址中，<a id="more"></a>这样的存储模式有点儿类似于把数据当作字符串顺序处理：地址由小向大增加，而数据从高位往低位放；</p>
-<h4 id="小端模式"><a href="#小端模式" class="headerlink" title="小端模式"></a>小端模式</h4><p>所谓的小端模式，是指数据的高位保存在内存的高地址中，而数 据的低位保存在内存的低地址中，这种存储模式将地址的高低和数据位权有效地结合起来，高地址部分权值高，低地址部分权值低，和我们的逻辑方法一致。</p>
-<h4 id="大小端判断"><a href="#大小端判断" class="headerlink" title="大小端判断"></a>大小端判断</h4><p>大小端可以用union判断<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> &#123; </span><br><span class="line">    <span class="keyword">int</span> i; </span><br><span class="line">    <span class="keyword">char</span> c; </span><br><span class="line">&#125;test; </span><br><span class="line"></span><br><span class="line">test.i = <span class="number">1</span>; </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s\n"</span>, test.c == <span class="number">1</span> ? <span class="string">"little_endian"</span> : <span class="string">"big_endian"</span>);</span><br></pre></td></tr></table></figure></p>
-<h4 id="一个题目"><a href="#一个题目" class="headerlink" title="一个题目"></a>一个题目</h4><p>在小端序的机器中,如果<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> X&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="keyword">char</span> y[<span class="number">4</span>]; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>那么:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X a; </span><br><span class="line">a.x=<span class="number">0x11223344</span>;<span class="comment">//16 进制 则:______</span></span><br></pre></td></tr></table></figure></p>
-<p>A   a.y[0]=11<br>B   a.y[1]=11<br>C   a.y[2]=11<br><strong>D   a.y[3]=11</strong><br>E   a.y[0]=22<br>F   a.y[3]=22</p>
-<p>本题实际的内存布局：<br>高   ————————–&gt;  低<br>|y[3]|y[2]    |y[1]|y[0]<br>|–|–|–|<br>|11|22|33|44</p>
+<h4 id="Linux命令more"><a href="#Linux命令more" class="headerlink" title="Linux命令more"></a>Linux命令more</h4><p><code>more</code> 命令，功能类似 <code>cat</code> ， <code>cat</code>命令是整个文件的内容从上到下显示在屏幕上。<code>more</code> 会以一页一页的显示方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能 。<code>more</code> 命令从前向后读取文件，因此在启动时就加载整个文件。</p>
+<h5 id="1．命令格式："><a href="#1．命令格式：" class="headerlink" title="1．命令格式："></a>1．命令格式：</h5><pre><code>more [-dlfpcsu ] [-num ] [+/ pattern] [+ linenum] [file ... ] 
+</code></pre><h5 id="2．命令功能："><a href="#2．命令功能：" class="headerlink" title="2．命令功能："></a>2．命令功能：</h5><p><code>more</code> 命令和 <code>cat</code> 的功能一样都是查看文件里的内容，但有所不同的是 <code>more</code> 可以按页来查看文件的内容，还支持直接跳转行等功能。</p>
+<h5 id="3．命令参数："><a href="#3．命令参数：" class="headerlink" title="3．命令参数："></a>3．命令参数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+n      从笫n行开始显示</span><br><span class="line">-n       定义屏幕大小为n行</span><br><span class="line">+/pattern 在每个档案显示前搜寻该字串（pattern），然后从该字串前两行之后开始显示</span><br><span class="line">-c       从顶部清屏，然后显示</span><br><span class="line">-d       提示“Press space to continue，’q’ to quit（按空格键继续，按q键退出）”，禁用响铃功能</span><br><span class="line">-l        忽略Ctrl+l（换页）字符</span><br><span class="line">-p       通过清除窗口而不是滚屏来对文件进行换页，与-c选项相似</span><br><span class="line">-s       把连续的多个空行显示为一行</span><br><span class="line">-u       把文件内容中的下画线去掉</span><br></pre></td></tr></table></figure>
+<h5 id="4．常用操作命令："><a href="#4．常用操作命令：" class="headerlink" title="4．常用操作命令："></a>4．常用操作命令：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Enter    向下n行，需要定义。默认为1行</span><br><span class="line">Ctrl+F   向下滚动一屏</span><br><span class="line">空格键  向下滚动一屏</span><br><span class="line">b  返回上一屏</span><br><span class="line">=       输出当前行的行号</span><br><span class="line">：f     输出文件名和当前行的行号</span><br><span class="line">v      调用vi编辑器</span><br><span class="line">!命令   调用Shell，并执行命令 </span><br><span class="line">q       退出more</span><br></pre></td></tr></table></figure>
+<h4 id="Linux命令head与tail"><a href="#Linux命令head与tail" class="headerlink" title="Linux命令head与tail"></a>Linux命令head与tail</h4><p>head 与 tail 就像它的名字一样的浅显易懂，它是用来显示开头或结尾某个数量的文字区块，head 用来显示档案的开头至标准输出中，而 tail 想当然尔就是看档案的结尾。 </p>
+<h5 id="1．命令格式：-1"><a href="#1．命令格式：-1" class="headerlink" title="1．命令格式："></a>1．命令格式：</h5><pre><code>head [参数]... [文件]...
+</code></pre><h6 id="2．命令功能：-1"><a href="#2．命令功能：-1" class="headerlink" title="2．命令功能："></a>2．命令功能：</h6><p>head 用来显示档案的开头至标准输出中，默认head命令打印其相应文件的开头10行。 </p>
+<h5 id="3．命令参数：-1"><a href="#3．命令参数：-1" class="headerlink" title="3．命令参数："></a>3．命令参数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-q 隐藏文件名</span><br><span class="line">-v 显示文件名</span><br><span class="line">-c&lt;字节&gt; 显示字节数</span><br><span class="line">-n&lt;行数&gt; 显示的行数</span><br><span class="line">tail -f filename 可以不断刷新显示</span><br></pre></td></tr></table></figure>
+<h4 id="linux下cat命令详解"><a href="#linux下cat命令详解" class="headerlink" title="linux下cat命令详解"></a>linux下cat命令详解</h4><p>cat主要有三大功能： </p>
+<ol>
+<li>一次显示整个文件。<code>$ cat filename</code></li>
+<li>从键盘创建一个文件。<code>$ cat &gt; filename</code> . (只能创建新文件,不能编辑已有文件)</li>
+<li>将几个文件合并为一个文件： <code>$cat file1 file2 &gt; file</code></li>
+</ol>
+<h5 id="命令参数："><a href="#命令参数：" class="headerlink" title="命令参数："></a>命令参数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n 或 --number 由 1 开始对所有输出的行数编号 </span><br><span class="line">-b 或 --number-nonblank 和 -n 相似，只不过对于空白行不编号 </span><br><span class="line">-s 或 --squeeze-blank 当遇到有连续两行以上的空白行，就代换为一行的空白行</span><br><span class="line">-v 或 --show-nonprinting</span><br></pre></td></tr></table></figure>
+<h5 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h5><p>把 textfile1 的档案内容加上行号后输入 textfile2 这个档案里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -n textfile1 &gt; textfile2</span><br></pre></td></tr></table></figure></p>
+<p>这条命令会直接清空textfile2</p>
+<p>把 textfile1 和 textfile2 的档案内容加上行号（空白行不加）之后将内容附加到 textfile3 里。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -b textfile1 textfile2 &gt;&gt; textfile3</span><br></pre></td></tr></table></figure></p>
+<p>这条命令不会清空textfile3,而是追加在textfile3后.</p>
+<h4 id="linux终端使用快捷键"><a href="#linux终端使用快捷键" class="headerlink" title="linux终端使用快捷键"></a>linux终端使用快捷键</h4><p>命令行光标移动：<br><code>crtl+a</code> 移动到命令行首<br><code>crtl+e</code> 移动到命令行尾<br><code>crtl+u</code> 从当前光标所在位置向前清除命令</p>
 <hr>
 <p>(EOF)</p>
             
@@ -256,7 +270,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/C-C/">C/C++</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/大小端问题/">大小端问题</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Linux命令/">Linux命令</a>
 
             </div>
         
@@ -265,7 +279,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/18/tech_diary_20150318/"  data-tooltip="技术日志:Linux命令 more head tail cat">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -273,7 +287,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/15/tech_diary_20150315/" data-tooltip="技术日志: c++中const修饰符作用总结">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/16/tech_diary_20150316/" data-tooltip="技术日志:大小端问题">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -288,17 +302,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -336,7 +350,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/18/tech_diary_20150318/"  data-tooltip="技术日志:Linux命令 more head tail cat">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/01/full_permutation /"  data-tooltip="递归实现全排列">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -344,7 +358,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/15/tech_diary_20150315/" data-tooltip="技术日志: c++中const修饰符作用总结">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/16/tech_diary_20150316/" data-tooltip="技术日志:大小端问题">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -359,17 +373,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -389,17 +403,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/16/tech_diary_20150316/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/03/18/tech_diary_20150318/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
