@@ -23,10 +23,10 @@
 <meta property="og:description" content="Vincent Driessen 提出的一个比较好的Git分支模型">
 <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/90200279.jpg">
 <meta property="og:image" content="http://nvie.com/img/main-branches@2x.png">
-<meta property="og:image" content="http://www.ituring.com.cn/download/01YiLAQlsJXe">
-<meta property="og:image" content="http://www.ituring.com.cn/download/01YiLAROllzF">
+<meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/48693137.jpg">
+<meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/91850324.jpg">
 <meta property="og:image" content="http://danielkummer.github.io/git-flow-cheatsheet/img/git-flow-commands.png">
-<meta property="og:updated_time" content="2016-03-29T14:22:20.523Z">
+<meta property="og:updated_time" content="2016-03-29T14:26:12.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个较好的Git分支模型">
 <meta name="twitter:description" content="Vincent Driessen 提出的一个比较好的Git分支模型">
@@ -261,12 +261,12 @@
 </ol>
 <h4 id="feature-分支"><a href="#feature-分支" class="headerlink" title="feature 分支"></a>feature 分支</h4><p><code>feature分支</code>主要用于新功能的开发，基于<code>develop分支</code>创建。当功能开发完成并且测试通过，<code>feature分支</code>要合并回<code>develop分支</code>然后删除。<code>feature分支</code>的命名可以使用除 <code>master</code>，<code>develop</code>，<code>release-*</code>，<code>hotfix-*</code>之外的任何名称，最好使用相应的功能命名，例如需要添加登陆功能，可以命名为<code>login</code>。</p>
 <p>如果某个功能的开发由单个工程师完成，则<code>feature分支</code>代码可以保存在开发者自己的代码库中而不强制提交到远程代码库里，如果需要多人开发某一功能则<code>feature分支</code>需要push到远端仓库。</p>
-<p><img src="http://www.ituring.com.cn/download/01YiLAQlsJXe" alt="feature branch"></p>
+<p><img src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/48693137.jpg" alt="feature branch"></p>
 <h4 id="release-分支"><a href="#release-分支" class="headerlink" title="release 分支"></a>release 分支</h4><p><code>release分支</code>主要用于版本的发布，当某一版本的所有功能开发完成并且测试通过，需要使用<code>release分支</code>进行发布，<code>release分支</code>基于<code>develop分支</code>创建。在这个分支上的代码允许做小的缺陷修正、准备发布版本所需的各项说明信息（版本号、发布时间、编译时间等等）。最后<code>release分支</code>会合并回<code>master分支</code>和<code>develop分支</code>，并且打上tag然后删除。</p>
 <p>当<code>develop分支</code>上的代码已经包含了所有即将发布的版本中所计划包含的软件功能，并且已通过所有测试时，我们就可以考虑准备创建<code>release分支</code>了。而所有在当前即将发布的版本之外的业务需求一定要确保不能混到<code>release分支</code>之内（避免由此引入一些不可控的系统缺陷）。</p>
 <p>在实际的开发中<code>release分支</code>生命周期可能要很长，因为涉及到bug的修复。</p>
 <h4 id="hotfix-分支"><a href="#hotfix-分支" class="headerlink" title="hotfix 分支"></a>hotfix 分支</h4><p><code>hotfix分支</code>主要用于紧急bug的修复。在运行环境中的版本有可能会出现bug，需要紧急修复，这时候用到<code>hotfix分支</code>。<code>hotfix分</code>支由<code>master分支</code>创建，当bug修复完毕，<code>hotfix分支</code>需要合并回<code>develop分支</code>和<code>master分支</code>，并且打上tag然后删除。</p>
-<p><img src="http://www.ituring.com.cn/download/01YiLAROllzF" alt="hotfix分支"></p>
+<p><img src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/91850324.jpg" alt="hotfix分支"></p>
 <h2 id="Git-Flow"><a href="#Git-Flow" class="headerlink" title="Git Flow"></a>Git Flow</h2><h4 id="Git-Flow-是什么"><a href="#Git-Flow-是什么" class="headerlink" title="Git Flow 是什么"></a>Git Flow 是什么</h4><p><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">Vincent Driessen</a>提出上面模型的同时，提供了一套git命令集合，通过这套命令集合可以很方便的维护项目的开发按照上面的模型进行，这就是Git Flow。</p>
 <h4 id="Git-Flow-安装"><a href="#Git-Flow-安装" class="headerlink" title="Git Flow 安装"></a>Git Flow 安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -OL https://raw.github.com/nvie/gitflow/develop/contrib/gitflow-installer.sh</span><br><span class="line">$ chmod +x gitflow-installer.sh</span><br><span class="line">$ sudo ./gitflow-installer.sh</span><br></pre></td></tr></table></figure>
 <p>更多的安装方式参见<a href="https://github.com/nvie/gitflow/wiki/Installation" target="_blank" rel="external">Wiki</a></p>
