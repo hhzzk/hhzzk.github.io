@@ -21,16 +21,16 @@
 <meta property="og:url" content="http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
 <meta property="og:description" content="Vincent Driessen 提出的一个比较好的Git分支模型">
-<meta property="og:image" content="https://ihower.tw/blog/wp-content/uploads/2011/02/Screen-shot-2009-12-24-at-11.32.03.png">
+<meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/90200279.jpg">
 <meta property="og:image" content="http://nvie.com/img/main-branches@2x.png">
 <meta property="og:image" content="http://www.ituring.com.cn/download/01YiLAQlsJXe">
 <meta property="og:image" content="http://www.ituring.com.cn/download/01YiLAROllzF">
 <meta property="og:image" content="http://danielkummer.github.io/git-flow-cheatsheet/img/git-flow-commands.png">
-<meta property="og:updated_time" content="2016-03-29T14:18:20.763Z">
+<meta property="og:updated_time" content="2016-03-29T14:22:20.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个较好的Git分支模型">
 <meta name="twitter:description" content="Vincent Driessen 提出的一个比较好的Git分支模型">
-<meta name="twitter:image" content="https://ihower.tw/blog/wp-content/uploads/2011/02/Screen-shot-2009-12-24-at-11.32.03.png">
+<meta name="twitter:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/90200279.jpg">
     
     
         
@@ -246,7 +246,7 @@
         <div class="main-content-wrap">
             <!-- excerpt --><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一个较好的Git分支模型"><span class="toc-text">一个较好的Git分支模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要分支"><span class="toc-text">主要分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#master-分支"><span class="toc-text">master 分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#develop-分支"><span class="toc-text">develop 分支</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#辅助分支"><span class="toc-text">辅助分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#feature-分支"><span class="toc-text">feature 分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#release-分支"><span class="toc-text">release 分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hotfix-分支"><span class="toc-text">hotfix 分支</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Flow"><span class="toc-text">Git Flow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Flow-是什么"><span class="toc-text">Git Flow 是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Flow-安装"><span class="toc-text">Git Flow 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Flow-命令"><span class="toc-text">Git Flow 命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-flow-init"><span class="toc-text">git flow init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Feature"><span class="toc-text">Feature</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Release-Hotfix"><span class="toc-text">Release / Hotfix</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol></p>
 <h2 id="一个较好的Git分支模型"><a href="#一个较好的Git分支模型" class="headerlink" title="一个较好的Git分支模型"></a>一个较好的Git分支模型</h2><p><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">Vincent Driessen</a>基于自己项目开发的经验提出了一个比较好的Git分支模型：</p>
-<p><img src="https://ihower.tw/blog/wp-content/uploads/2011/02/Screen-shot-2009-12-24-at-11.32.03.png" alt="gitflow branch"></p>
+<p><img src="http://7xrt06.com1.z0.glb.clouddn.com/16-3-29/90200279.jpg" alt="gitflow branch"></p>
 <p>在这个模型中定义了<strong>主要分支</strong>和<strong>辅助分支</strong>两类分支。其中主要分支包括<code>master分支</code>和<code>develop分支</code>，这两个分支在项目的整个生命周期中存在；辅助分支包括<code>feature分支</code>、<code>release分支</code>和<code>hotfix分支</code>，主要是为了解决一些特定的问题而建立的分支，这些分支随着问题的解决而销毁。</p>
 <h3 id="主要分支"><a href="#主要分支" class="headerlink" title="主要分支"></a>主要分支</h3><p>主要分支是项目的<strong>核心分支</strong>，开发中产生的所有代码最终都会合并到主要分支。主要分支中应该保存<strong>随时可以运行使用的代码</strong>，主要分支包括<code>master分支</code>和<code>develop分支</code>。在初始时，<code>master分支</code>和<code>develop分支</code>相同，此时开始基于<code>develop分支</code>进行开发，当相应版本的所有功能开发完毕，即可合并到<code>master分支</code>形成一个版本。</p>
 <p><img src="http://nvie.com/img/main-branches@2x.png" alt="main branch"></p>
