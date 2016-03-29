@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="hhzzk&#39;s blog">
+    <title>一个较好的Git分支模型 - hhzzk&#39;s blog</title>
+    <meta name="author" content="hhzzk">
+    
+        <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
+    
+    
+        <link rel="icon" href="http://www.hhzzk.xyz/assets/images/favicon.ico">
+    
+    
+    <meta name="description" content="Vincent Driessen 提出的一个比较好的Git分支模型">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="一个较好的Git分支模型">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/index.html">
+<meta property="og:site_name" content="hhzzk's blog">
+<meta property="og:description" content="Vincent Driessen 提出的一个比较好的Git分支模型">
+<meta property="og:image" content="https://ihower.tw/blog/wp-content/uploads/2011/02/Screen-shot-2009-12-24-at-11.32.03.png">
+<meta property="og:image" content="http://nvie.com/img/main-branches@2x.png">
+<meta property="og:image" content="http://www.ituring.com.cn/download/01YiLAQlsJXe">
+<meta property="og:image" content="http://www.ituring.com.cn/download/01YiLAROllzF">
+<meta property="og:image" content="http://danielkummer.github.io/git-flow-cheatsheet/img/git-flow-commands.png">
+<meta property="og:updated_time" content="2016-03-29T13:16:20.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个较好的Git分支模型">
+<meta name="twitter:description" content="Vincent Driessen 提出的一个比较好的Git分支模型">
+<meta name="twitter:image" content="https://ihower.tw/blog/wp-content/uploads/2011/02/Screen-shot-2009-12-24-at-11.32.03.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
+    
+    
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-16/76513528.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-16/76513528.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-quwccsthbllipo6252snb2tfkddvrsp1eczkytpz3vmxpsb6nwodixemlkux.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-75043309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?524967b36e424c809d8331e61e39d820";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">hhzzk&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">hhzzk</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            一个较好的Git分支模型
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sun May 03 2015 10:09:50 GMT+0800">
+	
+		    May 03, 2015
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/提高效率/">提高效率</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Vincent Driessen 提出的一个比较好的Git分支模型<br><a id="more"></a><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一个较好的Git分支模型"><span class="toc-text">一个较好的Git分支模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要分支"><span class="toc-text">主要分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#master-分支"><span class="toc-text">master 分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#develop-分支"><span class="toc-text">develop 分支</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#辅助分支"><span class="toc-text">辅助分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#feature-分支"><span class="toc-text">feature 分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#release-分支"><span class="toc-text">release 分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hotfix-分支"><span class="toc-text">hotfix 分支</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Flow"><span class="toc-text">Git Flow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Flow-是什么"><span class="toc-text">Git Flow 是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Flow-安装"><span class="toc-text">Git Flow 安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-Flow-命令"><span class="toc-text">Git Flow 命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-flow-init"><span class="toc-text">git flow init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Feature"><span class="toc-text">Feature</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Release-Hotfix"><span class="toc-text">Release / Hotfix</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol></p>
+<h2 id="一个较好的Git分支模型"><a href="#一个较好的Git分支模型" class="headerlink" title="一个较好的Git分支模型"></a>一个较好的Git分支模型</h2><p><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">Vincent Driessen</a>基于自己项目开发的经验提出了一个比较好的Git分支模型：</p>
+<p><img src="https://ihower.tw/blog/wp-content/uploads/2011/02/Screen-shot-2009-12-24-at-11.32.03.png" alt="gitflow branch"></p>
+<p>在这个模型中定义了<strong>主要分支</strong>和<strong>辅助分支</strong>两类分支。其中主要分支包括<code>master分支</code>和<code>develop分支</code>，这两个分支在项目的整个生命周期中存在；辅助分支包括<code>feature分支</code>、<code>release分支</code>和<code>hotfix分支</code>，主要是为了解决一些特定的问题而建立的分支，这些分支随着问题的解决而销毁。</p>
+<h3 id="主要分支"><a href="#主要分支" class="headerlink" title="主要分支"></a>主要分支</h3><p>主要分支是项目的<strong>核心分支</strong>，开发中产生的所有代码最终都会合并到主要分支。主要分支中应该保存<strong>随时可以运行使用的代码</strong>，主要分支包括<code>master分支</code>和<code>develop分支</code>。在初始时，<code>master分支</code>和<code>develop分支</code>相同，此时开始基于<code>develop分支</code>进行开发，当相应版本的所有功能开发完毕，即可合并到<code>master分支</code>形成一个版本。</p>
+<p><img src="http://nvie.com/img/main-branches@2x.png" alt="main branch"></p>
+<h4 id="master-分支"><a href="#master-分支" class="headerlink" title="master 分支"></a>master 分支</h4><p><code>master分支</code>上存放的应该是随时可供在生产环境中部署发布的代码（Production Ready state）。当某一版本的所有功能全部开发完毕，并且测试通过，产生了一份新的可供部署的代码时，<code>master分支</code>上的代码会被更新。同时，每一次更新，都会添加对应的版本号标签（TAG）。</p>
+<h4 id="develop-分支"><a href="#develop-分支" class="headerlink" title="develop 分支"></a>develop 分支</h4><p><code>develop分支</code>是保存当前最新开发成果的分支。当某个功能在<code>feature分支</code>（下文有介绍）开发完成并且测试通过则会合并到<code>develop分支</code>。原则上<code>develop分支</code>上的代码也是可以直接拿来运行使用的。</p>
+<h3 id="辅助分支"><a href="#辅助分支" class="headerlink" title="辅助分支"></a>辅助分支</h3><p>辅助分支是用于组织<strong>解决特定问题</strong>的各种软件开发活动的分支。辅助分支主要用于组织软件<strong>新功能的并行开发</strong>、简化新功能开发代码的跟踪、辅助<strong>完成版本发布</strong>工作以及对生产代码的缺陷<strong>进行紧急修复</strong>工作。这些分支与主分支不同，通常存在于有限的生命周期内。</p>
+<p>辅助分支有：</p>
+<ol>
+<li>用于新功能开发的<code>feature分支</code></li>
+<li>用于辅助版本发布的<code>release分支</code></li>
+<li>用于进行紧急修复的<code>hotfix分支</code></li>
+</ol>
+<h4 id="feature-分支"><a href="#feature-分支" class="headerlink" title="feature 分支"></a>feature 分支</h4><p><code>feature分支</code>主要用于新功能的开发，基于<code>develop分支</code>创建。当功能开发完成并且测试通过，<code>feature分支</code>要合并回<code>develop分支</code>然后删除。<code>feature分支</code>的命名可以使用除 <code>master</code>，<code>develop</code>，<code>release-*</code>，<code>hotfix-*</code>之外的任何名称，最好使用相应的功能命名，例如需要添加登陆功能，可以命名为<code>login</code>。</p>
+<p>如果某个功能的开发由单个工程师完成，则<code>feature分支</code>代码可以保存在开发者自己的代码库中而不强制提交到远程代码库里，如果需要多人开发某一功能则<code>feature分支</code>需要push到远端仓库。</p>
+<p><img src="http://www.ituring.com.cn/download/01YiLAQlsJXe" alt="feature branch"></p>
+<h4 id="release-分支"><a href="#release-分支" class="headerlink" title="release 分支"></a>release 分支</h4><p><code>release分支</code>主要用于版本的发布，当某一版本的所有功能开发完成并且测试通过，需要使用<code>release分支</code>进行发布，<code>release分支</code>基于<code>develop分支</code>创建。在这个分支上的代码允许做小的缺陷修正、准备发布版本所需的各项说明信息（版本号、发布时间、编译时间等等）。最后<code>release分支</code>会合并回<code>master分支</code>和<code>develop分支</code>，并且打上tag然后删除。</p>
+<p>当<code>develop分支</code>上的代码已经包含了所有即将发布的版本中所计划包含的软件功能，并且已通过所有测试时，我们就可以考虑准备创建<code>release分支</code>了。而所有在当前即将发布的版本之外的业务需求一定要确保不能混到<code>release分支</code>之内（避免由此引入一些不可控的系统缺陷）。</p>
+<p>在实际的开发中<code>release分支</code>生命周期可能要很长，因为涉及到bug的修复。</p>
+<h4 id="hotfix-分支"><a href="#hotfix-分支" class="headerlink" title="hotfix 分支"></a>hotfix 分支</h4><p><code>hotfix分支</code>主要用于紧急bug的修复。在运行环境中的版本有可能会出现bug，需要紧急修复，这时候用到<code>hotfix分支</code>。<code>hotfix分</code>支由<code>master分支</code>创建，当bug修复完毕，<code>hotfix分支</code>需要合并回<code>develop分支</code>和<code>master分支</code>，并且打上tag然后删除。</p>
+<p><img src="http://www.ituring.com.cn/download/01YiLAROllzF" alt="hotfix分支"></p>
+<h2 id="Git-Flow"><a href="#Git-Flow" class="headerlink" title="Git Flow"></a>Git Flow</h2><h4 id="Git-Flow-是什么"><a href="#Git-Flow-是什么" class="headerlink" title="Git Flow 是什么"></a>Git Flow 是什么</h4><p><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">Vincent Driessen</a>提出上面模型的同时，提供了一套git命令集合，通过这套命令集合可以很方便的维护项目的开发按照上面的模型进行，这就是Git Flow。</p>
+<h4 id="Git-Flow-安装"><a href="#Git-Flow-安装" class="headerlink" title="Git Flow 安装"></a>Git Flow 安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -OL https://raw.github.com/nvie/gitflow/develop/contrib/gitflow-installer.sh</span><br><span class="line">$ chmod +x gitflow-installer.sh</span><br><span class="line">$ sudo ./gitflow-installer.sh</span><br></pre></td></tr></table></figure>
+<p>更多的安装方式参见<a href="https://github.com/nvie/gitflow/wiki/Installation" target="_blank" rel="external">Wiki</a></p>
+<h4 id="Git-Flow-命令"><a href="#Git-Flow-命令" class="headerlink" title="Git Flow 命令"></a>Git Flow 命令</h4><p><img src="http://danielkummer.github.io/git-flow-cheatsheet/img/git-flow-commands.png" alt="git flow commands"></p>
+<h4 id="git-flow-init"><a href="#git-flow-init" class="headerlink" title="git flow init"></a>git flow init</h4><p>这个命令用来做一些初始化的操作，设定相应分支的名称，推荐使用默认的就好。</p>
+<p>如果在一个已经存在的git repo中执行<code>git flow init</code>，它会列出所有已经存在的branch让你选择，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/gitflow$ git flow init </span><br><span class="line"></span><br><span class="line">Which branch should be used for bringing forth production releases?</span><br><span class="line">   - dev</span><br><span class="line">   - master</span><br><span class="line"></span><br><span class="line">Branch name for production releases: [master] </span><br><span class="line"></span><br><span class="line">Which branch should be used for integration of the &quot;next release&quot;?</span><br><span class="line">   - dev</span><br><span class="line"></span><br><span class="line">Branch name for &quot;next release&quot; development: [develop] </span><br><span class="line"></span><br><span class="line">How to name your supporting branch prefixes?</span><br><span class="line">Feature branches? [feature/] </span><br><span class="line">Release branches? [release/] </span><br><span class="line">Hotfix branches? [hotfix/] </span><br><span class="line">Support branches? [support/] </span><br><span class="line">Version tag prefix? []</span><br></pre></td></tr></table></figure>
+<p>这里既可以选择用已经有的<code>dev分支</code>也可以用默认的<code>develop分支</code>，需要注意的是默认的<code>develop分支</code>是基于<code>master分支</code>创建的。</p>
+<h4 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h4><p><code>Feature 分支</code> 的创建基于develop，通过下面的命令创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/gitflow$ git flow feature start newFunc</span><br><span class="line">Switched to a new branch &apos;feature/newFunc&apos;</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch &apos;feature/newFunc&apos; was created, based on &apos;develop&apos;</span><br><span class="line">- You are now on branch &apos;feature/newFunc&apos;</span><br><span class="line"></span><br><span class="line">Now, start committing on your feature. When done, use:</span><br><span class="line"></span><br><span class="line">     git flow feature finish newFunc</span><br><span class="line"></span><br><span class="line">king@king:~/gitflow$ git branch </span><br><span class="line">  dev</span><br><span class="line">  develop</span><br><span class="line">* feature/newFunc</span><br><span class="line">  master</span><br></pre></td></tr></table></figure>
+<p>这个操作创建了新的分支并且切换到新的分支上。如果这个功能多个工程师共同开发，那么需要推送到远程仓库，执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/gitflow$ git flow feature publish newFunc</span><br><span class="line">Total 0 (delta 0), reused 0 (delta 0)</span><br><span class="line">remote: Updating references: 100% (1/1)</span><br><span class="line">To ssh://king@192.168.99.213:29418/~king/gitflow.git</span><br><span class="line"> * [new branch]      feature/newFunc -&gt; feature/newFunc</span><br><span class="line">Already on &apos;feature/newFunc&apos;</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new remote branch &apos;feature/newFunc&apos; was created</span><br><span class="line">- The local branch &apos;feature/newFunc&apos; was configured to track the remote branch</span><br><span class="line">- You are now on branch &apos;feature/newFunc&apos;</span><br></pre></td></tr></table></figure>
+<p>如果只有一个开发者，那么不需要推送到远程分支，<code>feature分支</code>只需要在开发者本地就行。</p>
+<p>现在你可以进行新的特性的开发，当所有功能开发完毕，可以执行下面的命令结束：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">king@king:~/gitflow$ git flow feature finish newFunc</span><br><span class="line">Switched to branch &apos;develop&apos;</span><br><span class="line">Updating aba6e76..1d98a66</span><br><span class="line">Fast-forward</span><br><span class="line"> 0 files changed</span><br><span class="line"> create mode 100644 newfile</span><br><span class="line">Deleted branch feature/newFunc (was 1d98a66).</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- The feature branch &apos;feature/newFunc&apos; was merged into &apos;develop&apos;</span><br><span class="line">- Feature branch &apos;feature/newFunc&apos; has been removed</span><br><span class="line">- You are now on branch &apos;develop&apos;</span><br></pre></td></tr></table></figure>
+<p>这样新特性就开发完毕了，通过执行上面的命令<code>feature/newFunc</code>分支被合并到<code>develop分支</code>，然后被删除。这时候你可能需要执行<code>git push origin develop</code>命令将<code>develop分支</code>推送到远程仓库。</p>
+<h4 id="Release-Hotfix"><a href="#Release-Hotfix" class="headerlink" title="Release / Hotfix"></a>Release / Hotfix</h4><p>这里两个命令和上面<code>feature</code>命令使用相同，不过执行的操作略有不同，参见下面的参考资料。另外这两个命令在执行<code>finish</code>操作时都会打上相应的tag。你可能需要执行<code>git push origin tagName</code>将tag推送到远程仓库。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">A successful Git branching model</a><br><a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="external">git-flow 备忘清单</a><br><a href="http://www.ituring.com.cn/article/56870" target="_blank" rel="external">基于git的源代码管理模型</a><br><a href="https://ihower.tw/blog/archives/5140" target="_blank" rel="external">Git flow 開發流程</a><br><a href="http://www.toobug.net/article/git_and_gitflow.html" target="_blank" rel="external">团队使用Git和Git-Flow手记</a><br><a href="https://github.com/nvie/gitflow" target="_blank" rel="external">git-flow 源码</a></p>
+<hr>
+<p>（EOF）</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Git/">Git</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/10/array_top_k_solution/" data-tooltip="一个Top K问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 hhzzk. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/10/array_top_k_solution/" data-tooltip="一个Top K问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/05/03/a_good_git_branch_model/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+        
+            <h4 id="about-card-name">hhzzk</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Shanghai
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-rjanlllosg30d03qrddpwrs6wqf4k3v0bbo68hiifuvthyhqfefx2htcagu0.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
