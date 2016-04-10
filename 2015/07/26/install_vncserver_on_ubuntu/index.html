@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="hhzzk&#39;s blog">
+    <title>How to install vncserver on ubuntu server 14.04 - hhzzk&#39;s blog</title>
+    <meta name="author" content="hhzzk">
+    
+        <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
+    
+    
+        <link rel="icon" href="http://www.hhzzk.xyz/assets/images/favicon.ico">
+    
+    
+    <meta name="description" content="Install vncserver on ubuntu server 14.04">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="How to install vncserver on ubuntu server 14.04">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/index.html">
+<meta property="og:site_name" content="hhzzk's blog">
+<meta property="og:description" content="Install vncserver on ubuntu server 14.04">
+<meta property="og:updated_time" content="2016-04-10T16:40:00.106Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to install vncserver on ubuntu server 14.04">
+<meta name="twitter:description" content="Install vncserver on ubuntu server 14.04">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
+    
+    
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-10/62106305.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-10/62106305.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-quwccsthbllipo6252snb2tfkddvrsp1eczkytpz3vmxpsb6nwodixemlkux.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-75043309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?524967b36e424c809d8331e61e39d820";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">hhzzk&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">hhzzk</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            How to install vncserver on ubuntu server 14.04
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sun Jul 26 2015 00:50:50 GMT+0800">
+	
+		    Jul 26, 2015
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/软件安装/">软件安装</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <!-- excerpt --></p>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-VNC-server"><span class="toc-text">Install VNC server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configure-VNC-Server"><span class="toc-text">Configure VNC Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Add-vncserver-as-init-service"><span class="toc-text">Add vncserver as init service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Connect-to-Your-VNC-Desktop-with-VNC-Client"><span class="toc-text">Connect to Your VNC Desktop with VNC Client</span></a></li></ol>
+<h2 id="Install-VNC-server"><a href="#Install-VNC-server" class="headerlink" title="Install VNC server"></a>Install VNC server</h2><ul>
+<li><p>In order to access the external network，we should set proxy in our system by putting the following in the <code>.bashrc</code> :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http_proxy= &lt;-- your http proxy address</span><br><span class="line">https_proxy=  &lt;-- you https proxy address</span><br><span class="line">no_proxy=&quot;local,localhost,127.0.0.1,YOUR-IP-ADDRESS&quot;</span><br><span class="line">export http_proxy</span><br><span class="line">export https_proxy</span><br><span class="line">export no_proxy</span><br><span class="line">export GIT_SSL_NO_VERIFY=1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Don’t forget replace YOUR-IP-ADDRESS, and then reboot your system or execute the following command:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Upgrade the packages on your system :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Then you’ll need to install the Gnome components using terminal :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gnome-core</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Install VNC server :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vnc4server</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Configure-VNC-Server"><a href="#Configure-VNC-Server" class="headerlink" title="Configure VNC Server"></a>Configure VNC Server</h2><ul>
+<li><p>Set VNC server password:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">testbed@ubuntu:~$ vncserver</span><br><span class="line"> </span><br><span class="line">You will require a password to access your desktops.</span><br><span class="line"> </span><br><span class="line">Password:  &lt;--- put your password</span><br><span class="line">Verify:    &lt;--- put your password again</span><br><span class="line">xauth:  file /home/testbed/.Xauthority does not exist</span><br><span class="line"> </span><br><span class="line">New &apos;ubuntu:1 (testbed)&apos; desktop is ubuntu:1</span><br><span class="line"> </span><br><span class="line">Creating default startup script /home/testbed/.vnc/xstartup</span><br><span class="line">Starting applications specified in /home/testbed/.vnc/xstartup</span><br><span class="line">Log file is /home/testbed/.vnc/ubuntu:1.log</span><br><span class="line"> </span><br><span class="line">testbed@ubuntu:~$</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Configure xstartup file<br>Before we begin configuring new xstartup file, back up the original first:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">testbed@ubuntu:~$ cd .vnc/</span><br><span class="line">testbed@ubuntu:~/.vnc$ cp xstartup xstartup.bak</span><br><span class="line">testbed@ubuntu:~/.vnc$ vim xstartup</span><br><span class="line"># copy the following configuration and save it into the file:</span><br><span class="line"></span><br><span class="line">#!/bin/sh</span><br><span class="line"> </span><br><span class="line"># Uncomment the following two lines for normal desktop:</span><br><span class="line"># unset SESSION_MANAGER</span><br><span class="line"># exec /etc/X11/xinit/xinitrc</span><br><span class="line">gnome-panel &amp;</span><br><span class="line">gnome-settings-daemon &amp;</span><br><span class="line">metacity &amp;</span><br><span class="line">nautilus &amp;</span><br><span class="line">gnome-terminal &amp;</span><br><span class="line">[ -x /etc/vnc/xstartup ] &amp;&amp; exec /etc/vnc/xstartup</span><br><span class="line">[ -r $HOME/.Xresources ] &amp;&amp; xrdb $HOME/.Xresources</span><br><span class="line">xsetroot -solid grey</span><br><span class="line">vncconfig -iconic &amp;</span><br><span class="line">x-terminal-emulator -geometry 80x24+10+10 -ls -title &quot;$VNCDESKTOP Desktop&quot; &amp;</span><br><span class="line">x-window-manager &amp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Restart vncserver<br>Now, we should kill the VNC server session that is running, and recreate it using the screen size you want:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">testbed@ubuntu:~/.vnc$ vncserver -kill :1</span><br><span class="line">Killing Xvnc4 process ID 20709</span><br><span class="line">testbed@ubuntu:~/.vnc$ vncserver -geometry 1300x1000</span><br><span class="line"> </span><br><span class="line">New &apos;ubuntu:1 (testbed)&apos; desktop is ubuntu:1</span><br><span class="line"> </span><br><span class="line">Starting applications specified in /home/testbed/.vnc/xstartup</span><br><span class="line">Log file is /home/testbed/.vnc/ubuntu:1.log</span><br><span class="line"> </span><br><span class="line">testbed@ubuntu:~/.vnc$</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Tips: you can get multiple VNC sessions by multiple commands <code>vncserver [option]</code>, you will got diffrent display ports, and these ports will used by VNC client as following.</p>
+<h2 id="Add-vncserver-as-init-service"><a href="#Add-vncserver-as-init-service" class="headerlink" title="Add vncserver as init service"></a>Add vncserver as init service</h2><p>we also need to automatically start vncserver if system reboot</p>
+<ul>
+<li>Create init script<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=&quot;$PATH:/usr/bin/&quot;</span><br><span class="line">export USER=&quot;testbed&quot;</span><br><span class="line">DISPLAY=&quot;1&quot;</span><br><span class="line">GEOMETRY=&quot;1680x1050&quot;</span><br><span class="line">OPTIONS=&quot;-geometry $&#123;GEOMETRY&#125; :$&#123;DISPLAY&#125;&quot;</span><br><span class="line">. /lib/lsb/init-functions</span><br><span class="line"> </span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">start)</span><br><span class="line">log_action_begin_msg &quot;Starting vncserver for user &apos;$&#123;USER&#125;&apos; on localhost:$&#123;DISPLAY&#125;&quot;</span><br><span class="line">su $&#123;USER&#125; -c &quot;/usr/bin/vncserver $&#123;OPTIONS&#125;&quot;</span><br><span class="line">;;</span><br><span class="line"> </span><br><span class="line">stop)</span><br><span class="line">log_action_begin_msg &quot;Stopping vncserver for user &apos;$&#123;USER&#125;&apos; on localhost:$&#123;DISPLAY&#125;&quot;</span><br><span class="line">su $&#123;USER&#125; -c &quot;/usr/bin/vncserver -kill :$&#123;DISPLAY&#125;&quot;</span><br><span class="line">;;</span><br><span class="line"> </span><br><span class="line">restart)</span><br><span class="line">$0 stop</span><br><span class="line">$0 start</span><br><span class="line">;;</span><br><span class="line">esac</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>Add it to default service<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /etc/init.d/vncserver</span><br><span class="line">sudo update-rc.d vncserver defaults</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Connect-to-Your-VNC-Desktop-with-VNC-Client"><a href="#Connect-to-Your-VNC-Desktop-with-VNC-Client" class="headerlink" title="Connect to Your VNC Desktop with VNC Client"></a>Connect to Your VNC Desktop with VNC Client</h2><p>You can use your <a href="https://www.realvnc.com/download/viewer/" target="_blank" rel="external">VNC viewer</a> to connect to the VNC server at IP_ADRESS:display_port.</p>
+<hr>
+<p>(EOF)</p>
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/Vncserver/">Vncserver</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/ubuntu/">ubuntu</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/08/15/vimium_in_chrome/"  data-tooltip="Vimium: 像Vim一样操作Chrome">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/10/setting_global_proxy_by_proxychains/" data-tooltip="利用proxychains v4在ubuntu下设置全局代理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 hhzzk. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/08/15/vimium_in_chrome/"  data-tooltip="Vimium: 像Vim一样操作Chrome">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/10/setting_global_proxy_by_proxychains/" data-tooltip="利用proxychains v4在ubuntu下设置全局代理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/07/26/install_vncserver_on_ubuntu/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+        
+            <h4 id="about-card-name">hhzzk</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Shanghai
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-rjanlllosg30d03qrddpwrs6wqf4k3v0bbo68hiifuvthyhqfefx2htcagu0.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
