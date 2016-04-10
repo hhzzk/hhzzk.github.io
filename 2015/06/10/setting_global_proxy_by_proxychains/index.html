@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.hhzzk.xyz/2015/06/10/setting_global_proxy_by_proxychains/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
 <meta property="og:description" content="利用proxychains v4在ubuntu下设置全局代理以及解决 ERROR: ld.so: object ‘libproxychains.so.3’ from LD_PRELOAD cannot be preloaded: ignored 的问题">
-<meta property="og:updated_time" content="2016-04-10T04:13:32.302Z">
+<meta property="og:updated_time" content="2016-04-10T04:17:54.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用proxychains v4在ubuntu下设置全局代理">
 <meta name="twitter:description" content="利用proxychains v4在ubuntu下设置全局代理以及解决 ERROR: ld.so: object ‘libproxychains.so.3’ from LD_PRELOAD cannot be preloaded: ignored 的问题">
@@ -246,8 +246,9 @@
 <h4 id="5-修改配置文件："><a href="#5-修改配置文件：" class="headerlink" title="5. 修改配置文件："></a>5. 修改配置文件：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/proxychains.conf</span><br><span class="line">// 将[ProxyList] 后面的部分设置为自己的代理设置即可 支持多个轮询 例如：</span><br><span class="line">socks5 127.0.0.1 1080</span><br></pre></td></tr></table></figure>
 <h4 id="6-使用方法："><a href="#6-使用方法：" class="headerlink" title="6. 使用方法："></a>6. 使用方法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 应用名</span><br><span class="line">例如：</span><br><span class="line">wget google.com  // 无法获取index.html</span><br><span class="line">proxychains4 wget googel.com  // 可以获得index.html</span><br></pre></td></tr></table></figure>
 <p>但是在使用此方法执行 <code>ssh</code> ,经常出现连接成功后在很短的时间内断开的现象，解决方法如下：<br>第一种方案在客户端设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ssh/ssh_config</span><br><span class="line"></span><br><span class="line">// 添加下面语句，这样客户端会每个10s发送一个keepAive请求。</span><br><span class="line">ServerAliveInterval 10</span><br></pre></td></tr></table></figure></p>
-<p>第二种方案在服务器端设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ssh/ssh_config</span><br><span class="line"></span><br><span class="line">//添加下面的语句</span><br><span class="line">ClientAliveInterval 60</span><br></pre></td></tr></table></figure></p>
-<p>第二种方案需要重启<code>ssh</code>服务（sudo /etc/init.d/ssh restart）。<br>安装了此版本的 <code>proxychains</code> 之后，<code>ERROR: ld.so: object ‘libproxychains.so.3’ from LD_PRELOAD cannot be preloaded: ignored</code>这个错误也会解决。</p>
+<p>第二种方案在服务器端设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ssh/ssh_config</span><br><span class="line"></span><br><span class="line">// 添加下面的语句</span><br><span class="line">ClientAliveInterval 60</span><br></pre></td></tr></table></figure></p>
+<p>第二种方案需要重启<code>ssh</code>服务（<code>sudo /etc/init.d/ssh restart</code>）。</p>
+<p>安装了此版本的 <code>proxychains</code> 之后，<code>ERROR: ld.so: object ‘libproxychains.so.3’ from LD_PRELOAD cannot be preloaded: ignored</code>这个错误也会解决。</p>
 <hr>
 <p>（EOF）</p>
             
