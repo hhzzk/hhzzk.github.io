@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="hhzzk&#39;s blog">
-    <title>一个Top K问题 - hhzzk&#39;s blog</title>
+    <title>内存分配，任意字节对齐 - hhzzk&#39;s blog</title>
     <meta name="author" content="hhzzk">
     
         <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
@@ -15,16 +15,16 @@
         <link rel="icon" href="http://www.hhzzk.xyz/assets/images/favicon.ico">
     
     
-    <meta name="description" content="有 20 个数组，每个数组有 500 个元素，并且是有序排列好的，要求在这 20*500 个数中找出排名前 500 的数。">
+    <meta name="description" content="实现可以对齐到任意字节的malloc函数。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="一个Top K问题">
-<meta property="og:url" content="http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/index.html">
+<meta property="og:title" content="内存分配，任意字节对齐">
+<meta property="og:url" content="http://www.hhzzk.xyz/2015/04/14/memory_assigment/index.html">
 <meta property="og:site_name" content="hhzzk's blog">
-<meta property="og:description" content="有 20 个数组，每个数组有 500 个元素，并且是有序排列好的，要求在这 20*500 个数中找出排名前 500 的数。">
-<meta property="og:updated_time" content="2016-03-25T13:41:00.578Z">
+<meta property="og:description" content="实现可以对齐到任意字节的malloc函数。">
+<meta property="og:updated_time" content="2016-04-13T14:43:12.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个Top K问题">
-<meta name="twitter:description" content="有 20 个数组，每个数组有 500 个元素，并且是有序排列好的，要求在这 20*500 个数中找出排名前 500 的数。">
+<meta name="twitter:title" content="内存分配，任意字节对齐">
+<meta name="twitter:description" content="实现可以对齐到任意字节的malloc函数。">
     
     
         
@@ -33,8 +33,8 @@
         <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
     
     
-        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-3-13/35334370.jpg" />
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-13/33672995.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-13/33672995.jpg" />
     
     
     
@@ -217,13 +217,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            一个Top K问题
+            内存分配，任意字节对齐
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" content="Fri Apr 10 2015 20:10:20 GMT+0800">
+    <time itemprop="datePublished" content="Tue Apr 14 2015 16:54:57 GMT+0800">
 	
-		    Apr 10, 2015
+		    Apr 14, 2015
     	
     </time>
     
@@ -238,12 +238,12 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>有 20 个数组，每个数组有 500 个元素，并且是有序排列好的，要求在这 20*500 个数中找出排名前 500 的数。<br><a id="more"></a><br>看题目是要找出排名靠前的500个数，很明显是top k问题，所以首先想到的就是用堆排序。</p>
-<p><strong>做法</strong><br>先取一个数组的500个元素组成一个大根堆，然后依次遍历剩下的19个数组，每次取一个数与堆顶元素比较，如果小于堆顶元素则将堆顶元素删除，并且将此元素放入堆中，否则继续遍历。这样等所有数组全部遍历完之后，后序遍历大根堆既是排名靠前的500个元素了。</p>
-<p><strong>改进做法</strong><br>题目中给的是20个数组，并且是排好序的，如果采用上面的做法，那么这一点就没有利用上。我们假设20个数组都是按升序排好的。<br>首先，一开始构造堆的时候我们并不选取某一个数组，而是取每个数组的前25个数字（500/20），因为数组是排好序的，这样的做法可以保证堆中的元素基本最小。然后在遍历20个数组的时候，从第26个元素开始遍历，并且如果当某一个元素大于堆顶元素的时候，就可以忽略这个数组的后面的元素了，直接遍历后面的数组即可。</p>
+            <!-- excerpt --></p>
+<p>malloc的对齐策略遵循以下两个原则：<br>1.必须是2的幂<br>2.必须是(void *)的整数倍。<br>具体的实现方法可以参考这篇<a href="http://www.cnblogs.com/Creator/archive/2012/04/05/2433386.html" target="_blank" rel="external">博客</a><br>但在很多笔试面试题中经常要求应聘者自己实现malloc函数，并且要求可以对齐到任意字节（既可以被任意字节整除）</p>
+<p>以下为实现方法：<br>alignment表示要对齐的字节。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">aligned_malloc</span> <span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> alignment)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="comment">// 利用系统的malloc分配，但是每次都多分配alignment大小的空间</span></span><br><span class="line">  <span class="keyword">void</span>* ptr = <span class="built_in">malloc</span>(size + alignment);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (ptr)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">// 调整地址，使其对齐到alignment。原理就是当前分配的地址加上一定的偏移量。</span></span><br><span class="line">      <span class="comment">// 注意如果分配的地址正好对齐到aligment上，也要进行调整，正好加上aligment大小的偏移量</span></span><br><span class="line">      <span class="keyword">void</span>* aligned = (<span class="keyword">void</span>*)(((<span class="keyword">long</span>)ptr + alignment) &amp; ~(alignment - <span class="number">1</span>));</span><br><span class="line">      <span class="comment">// 保存实际的分配地址，释放内存空间时使用。 </span></span><br><span class="line">      ((<span class="keyword">void</span>**)aligned)[<span class="number">-1</span>] = ptr;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> aligned;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">aligned_free</span><span class="params">(<span class="keyword">void</span>  *paligned)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">      <span class="comment">// 释放内存，注意是使用 delete[]</span></span><br><span class="line">      <span class="keyword">delete</span> [ ]paligned;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>delete 和 delete[] 的区别<br>delete和delete[] 用来释放内存，调用析构函数。<br>如果只是释放堆上的内存，两者好似没有区别的，无论是new还是new[]申请的内存空间，用delete都可以释放。<br>主要的区别是调用析构函数，delete只会调用第一个对象的析构函数，而delete[]则会调用所有由new[]产出的对象的析构函数。<br>另外，delete p 是删除释放一个单元，delete [] p 是释放 多个单元，具体的数据目是查系统的分配表得到的<br>更详细的分析看<a href="http://www.cnblogs.com/hazir/p/new_and_delete.html" target="_blank" rel="external">这里</a></p>
 <hr>
 <p>(EOF)</p>
-
             
         </div>
     </div>
@@ -252,7 +252,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/all-tags/Top-K/">Top K</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/排序/">排序</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/算法/">算法</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/面试题/">面试题</a>
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/内存分配/">内存分配</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/算法/">算法</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/面试题/">面试题</a>
 
             </div>
         
@@ -261,7 +261,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/14/memory_assigment/"  data-tooltip="内存分配，任意字节对齐">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/05/03/a_good_git_branch_model/"  data-tooltip="一个较好的Git分支模型">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -269,7 +269,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/" data-tooltip="Linux程序运行时在前后台切换">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/10/array_top_k_solution/" data-tooltip="一个Top K问题">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -284,17 +284,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -332,7 +332,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/14/memory_assigment/"  data-tooltip="内存分配，任意字节对齐">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/05/03/a_good_git_branch_model/"  data-tooltip="一个较好的Git分支模型">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -340,7 +340,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/06/run_progrom_backgroud/" data-tooltip="Linux程序运行时在前后台切换">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/04/10/array_top_k_solution/" data-tooltip="一个Top K问题">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -355,17 +355,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -385,17 +385,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/10/array_top_k_solution/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2015/04/14/memory_assigment/">
                 <i class="fa fa-twitter"></i><span>Share on Twitter</span>
             </a>
         </li>
