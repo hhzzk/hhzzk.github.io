@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="hhzzk&#39;s blog">
+    <title>编程之美：数学之魅（２） - hhzzk&#39;s blog</title>
+    <meta name="author" content="hhzzk">
+    
+        <meta name="keywords" content="hhzzk python 云计算 算法 技术,">
+    
+    
+        <link rel="icon" href="http://www.hhzzk.xyz/assets/images/favicon.ico">
+    
+    
+    <meta name="description" content="不要被阶乘吓倒、寻找数组中的最大值和最小值、快速寻找满足条件的两个数、子数组的最大乘积、数组的分割、区间重合判断。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="编程之美：数学之魅（２）">
+<meta property="og:url" content="http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/index.html">
+<meta property="og:site_name" content="hhzzk's blog">
+<meta property="og:description" content="不要被阶乘吓倒、寻找数组中的最大值和最小值、快速寻找满足条件的两个数、子数组的最大乘积、数组的分割、区间重合判断。">
+<meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-12/10258855.jpg">
+<meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-13/63982355.jpg">
+<meta property="og:updated_time" content="2016-04-16T14:14:47.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编程之美：数学之魅（２）">
+<meta name="twitter:description" content="不要被阶乘吓倒、寻找数组中的最大值和最小值、快速寻找满足条件的两个数、子数组的最大乘积、数组的分割、区间重合判断。">
+<meta name="twitter:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-12/10258855.jpg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=640"/>
+    
+    
+        <meta property="og:image" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-12/14915809.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xrt06.com1.z0.glb.clouddn.com/16-4-12/14915809.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-quwccsthbllipo6252snb2tfkddvrsp1eczkytpz3vmxpsb6nwodixemlkux.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-75043309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?524967b36e424c809d8331e61e39d820";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">hhzzk&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="4">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">hhzzk</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            编程之美：数学之魅（２）
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sat Apr 16 2016 21:05:57 GMT+0800">
+	
+		    Apr 16, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/原创/">原创</a>, <a class="category-link" href="/categories/原创/算法系列/">算法系列</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <!-- excerpt --></p>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-不要被阶乘吓倒"><span class="toc-text">一. 不要被阶乘吓倒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-寻找数组中的最大值和最小值"><span class="toc-text">二. 寻找数组中的最大值和最小值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-快速寻找满足条件的两个数"><span class="toc-text">三. 快速寻找满足条件的两个数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-子数组的最大乘积"><span class="toc-text">四. 子数组的最大乘积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-数组的分割"><span class="toc-text">五. 数组的分割</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-区间重合判断"><span class="toc-text">六. 区间重合判断</span></a></li></ol>
+<h2 id="一-不要被阶乘吓倒"><a href="#一-不要被阶乘吓倒" class="headerlink" title="一. 不要被阶乘吓倒"></a>一. 不要被阶乘吓倒</h2><p>两个与阶乘相关的问题：<br>1） 给定一个整数N，那么N的阶乘 <code>N！</code>末尾有多少个0呢？<br>2） 求 <code>N！</code> 的二进制表示中最低位1的位置</p>
+<p><strong>方案一</strong><br>问题一中要求 <code>N!</code> 末尾有多少个0，其实就是 <code>1，2，3，...,N</code> 这些数中能乘出多少个10，我们知道2和5相乘可以得到一个10，所以可以对 <code>N!</code> 进行质数分解，$N!=2^X<em>3^Y</em>5^Z…$ ，于是我们只要算出 X, Z 最小的那个值即可。又因为能被2整除的数出现的频率比能被5整除的数高的多，所以只要求出 Z 即可。<br>问题最终转化成了求 <code>N!</code> 中含有质因数5的个数。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ret = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">&#123;</span><br><span class="line">    j = i;</span><br><span class="line">    <span class="keyword">while</span>(j % <span class="number">5</span> == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ret++;</span><br><span class="line">        j /= <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="二-寻找数组中的最大值和最小值"><a href="#二-寻找数组中的最大值和最小值" class="headerlink" title="二. 寻找数组中的最大值和最小值"></a>二. 寻找数组中的最大值和最小值</h2><p>对于一个包含N个元素的数组，需要比较多少次才能把最大值和最小值找出来？</p>
+<p><strong>方案一</strong><br>定义两个变量 <code>MAX</code> 和 <code>MIN</code> ，分别保存最大值和最小值。按顺序遍历数组，每次取出两个元素，首先比较两个数组元素，较大的元素和 <code>MAX</code> 比较，如果大于 <code>MAX</code>，则用此元素替换掉 <code>MAX</code> 的值。然后较小的元素和 <code>MIN</code> 比较，如果小于 <code>MIN</code>， 则用此元素替换掉 <code>MIN</code> 的值。比较过程如下图:</p>
+<p><img src="http://7xrt06.com1.z0.glb.clouddn.com/16-4-12/10258855.jpg" alt=""></p>
+<p>整个过程的比较次数为 <code>1.5N</code>。</p>
+<p><strong>方案二</strong><br>方案二采用分治法，将数组分为两部分，分别求出 <code>MAX</code> 和 <code>MIN</code>，最后将两部分的最大值和最小值再作比较。但这种方法的比较次数仍然没有减少。</p>
+<h2 id="三-快速寻找满足条件的两个数"><a href="#三-快速寻找满足条件的两个数" class="headerlink" title="三. 快速寻找满足条件的两个数"></a>三. 快速寻找满足条件的两个数</h2><p>能够快速找出一个数组中的两个数，使得这两个数的和等于给定的某个特定值。假设符合条件的两个数一定存在。</p>
+<p><strong>方案一</strong><br>假设给定的和为<code>Sum</code>，根据题目的要求既是,对于每一个数组元素 <code>arr[i]</code>,数组中是否存在 <code>Sum-arr[i]</code>。<br>首先将数组排序，所需的时间复杂度为$O(Nlog_2 N)$。查找的时候采用二分查找的方式，这样每一次查找的时间复杂度为$O(log_2 N)$，而总的查找时间复杂度也是$O(Nlog_2 N)$。因为只需要排序一次，所以整个算法的时间复杂度为$O(Nlog_2 N)$。</p>
+<p><strong>方案二</strong><br>首先将数组排序，所需的时间复杂度为$O(Nlog_2 N)$。<br>令 <code>i = 0， j = n-1</code>, 首先判断 <code>arr[i]</code> 和 <code>arr[j]</code> 的和是否等于 <code>Sum</code>, 如果相等则退出，否则如果大于 <code>Sum</code> 则 <code>j--</code> ，如果小于  <code>Sum</code> 则 <code>i++</code>。这个过程只需要遍历一次数组，时间复杂度为 $O(N)$。<br>两步加起来的时间复杂度也是$O(Nlog_2 N)$。<br>伪代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>, j = n - <span class="number">1</span>; i &lt; j;)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr[i] + arr[j] == Sum)</span><br><span class="line">        <span class="keyword">return</span> (i, j);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(arr[i] + arr[j] &lt; Sum)</span><br><span class="line">        i++;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        j--;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (<span class="number">-1</span>, <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="四-子数组的最大乘积"><a href="#四-子数组的最大乘积" class="headerlink" title="四. 子数组的最大乘积"></a>四. 子数组的最大乘积</h2><p>给定一个长度为N的整数数组，只允许用乘法，不能用除法，计算任意一个 <code>N-1</code> 个数组合的乘积中最大的一组。</p>
+<p><strong>方案一</strong><br>假设N个数的乘积为P，对P的正负性进行分析：</p>
+<ul>
+<li><p>如果P为0：<br>  那么数组中一定存在0，假设去掉一个0之后的乘积为Q，根据Q的正负性进行讨论：</p>
+<ul>
+<li>Q为0：<br>  说明数组中至少有两个0，那么 <code>N-1</code> 个数组的乘积一定为0.</li>
+<li>Q为正：<br>  说明Q既是最大的乘积。</li>
+<li>Q为负：<br>  说明0既是最大的乘积，用0替换掉任意一个元素即可。</li>
+</ul>
+</li>
+<li><p>如果P为正：<br>  说明数组中没有负数或者负数的个数正好是偶数，所以应该去掉一个最小的正数，这样余下的元素既是乘积最大的那一组。</p>
+</li>
+<li><p>如果P为负：<br>  说明数组中的负数为奇数个，所以应该去掉一个负数，这样可以保证乘积为正。如果想要余下的元素乘积最大，那么去掉的负数应该是绝对值最小的那个。</p>
+</li>
+</ul>
+<p>因为 <code>N</code> 个数的乘积有可能出现溢出的情况，所以可以通过计算数组中正数、负数、0的个数的情况进行判断。</p>
+<p>因为只需要遍历数组一次，所以时间复杂度为 $O(N)$。</p>
+<h2 id="五-数组的分割"><a href="#五-数组的分割" class="headerlink" title="五. 数组的分割"></a>五. 数组的分割</h2><p>有一个乱序，元素个数为 <code>2n</code> 的正整数数组，如何能够把这个数组分割为元素个数为 <code>n</code> 的两个数组，并使两个数组的和接近。</p>
+<p><strong>方案一</strong></p>
+<h2 id="六-区间重合判断"><a href="#六-区间重合判断" class="headerlink" title="六. 区间重合判断"></a>六. 区间重合判断</h2><p><img src="http://7xrt06.com1.z0.glb.clouddn.com/16-4-13/63982355.jpg" alt=""></p>
+<p><strong>方案一</strong><br>先将目标区间排序，例如： [2,3][1,2][3,9] -&gt; [1,2][2,3][3,9] 。 排序方法安装首元素排序。<br>将排序后的目标区间合并成若干个不相交的区间，举例中可以合并成一个区间：<br>[1,2][2,3][3,9] -&gt; [1,9]。合并时判断相邻区间是否首尾相交。q<br>采用二分查找判断源区间是否在某个目标区间中。因为合并后的若干个区间是有序的，所以采用二分查找法。</p>
+<p>时间复杂度：<br>排序时间复杂度： $O(N*log_2 N)$ (其中N是目标区间的个数)<br>合并区间的时间复杂度： $O(N)$<br>查找的时间复杂度： $O(log_2 N)$</p>
+<hr>
+<p>(EOF)</p>
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/all-tags/算法/">算法</a> <a class="tag tag--primary tag--small t-link" href="/all-tags/面试题/">面试题</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/01/beauty_of_math_1/" data-tooltip="编程之美：数学之魅（1）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 hhzzk. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/04/01/beauty_of_math_1/" data-tooltip="编程之美：数学之魅（1）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#table-of-contents">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://www.hhzzk.xyz/2016/04/16/beauty_of_math_2/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/18eb985044a2ae319c66e06c1d7c5cf7?s=110"/>
+        
+            <h4 id="about-card-name">hhzzk</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Shanghai
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-rjanlllosg30d03qrddpwrs6wqf4k3v0bbo68hiifuvthyhqfefx2htcagu0.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+
+
+
+</html>
